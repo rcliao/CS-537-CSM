@@ -2,6 +2,7 @@ package org.csm.controllers;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -21,10 +22,11 @@ public class HelloWorld {
 		return "Hello Jersey";
 	}
 
-	@Path("/user")
-	@Produces("application/json")
-	public User getHelloUser() {
-		return new User("Hello User");
+	@GET
+	@Path("/{username}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public User getHelloUser(@PathParam("username") String username) {
+		return new User(username);
 	}
 
 } 

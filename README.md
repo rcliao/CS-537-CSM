@@ -1,4 +1,4 @@
-CS-537-CSM
+:iphone: CS-537-CSM
 ==========
 
 Cal State Mobile - mobile website for the Cal State university students.
@@ -22,7 +22,7 @@ Cal State Mobile - mobile website for the Cal State university students.
 2. Execute `mvn tomcat:run` at the root directory of this project (CS-537-CSM)
 3. Open browser and go to `http://localhost:8080/csm` to check if tomcat is running
 
-## Project architecture
+## :house: Project Architecture
 ```
 .
 ├── pom.xml

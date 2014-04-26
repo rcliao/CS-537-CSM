@@ -3,6 +3,14 @@ CS-537-CSM
 
 Cal State Mobile - mobile website for the Cal State university students.
 
+## Developer Guidelines
+* `master` branch should always be stable and deployable
+* When you are working any feature, please branch out from latest commit on `master` branch, create a **pull-request** when you are done with implementation
+	* Always do a `git fetch && git pull origin master` when you start branch from master
+* Before you start coding, write down the `test cases` for the feature, and implement test cases under `test/java` so that you can test your codes when you are done. This will help us to create more reliable code
+* When you open a pull request, be descriptive on what you have done. Assign a person to review your code before you merge your code to the master
+* Document your code! Keep your code maintable, you are not the only one to look at it.
+
 ## How to run the project
 ### Use Eclipse
 1. Under [Eclipse](http://eclipse.org), go to `file>import` select `Existing Maven Project`

@@ -8,9 +8,6 @@ import javax.ws.rs.core.MediaType;
 
 // Plain old Java Object it does not extend as class or implements 
 // an interface
-
-
-
 import org.csm.models.User;
 
 //Sets the path to base URL + /hello

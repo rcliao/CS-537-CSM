@@ -2,19 +2,26 @@
 <html lang="en" ng-app="myApp">
 <head>
 	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 	<title>My AngularJS App</title>
+
+	<!-- fonts -->
+	<link href="http://fonts.googleapis.com/css?family=Lobster" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Cabin" rel="stylesheet" type="text/css">
+
+	<!-- Styles -->
+	<link rel="stylesheet" href="bower_components/semantic/build/packaged/css/semantic.css">
 	<link rel="stylesheet" href="css/app.css"/>
 </head>
 <body>
-	<ul class="menu">
-		<li><a href="#/view1">view1</a></li>
-		<li><a href="#/view2">view2</a></li>
-	</ul>
+	<header>
+		<i class="icon mobile"></i>CSM <i class="icon settings header-right"></i>
+	</header>
 
 	<div ng-view></div>
 
-	<div>Angular seed app: v<span app-version></span></div>
-
+	<script src="bower_components/jquery/dist/jquery.js"></script>
+	<script src="bower_components/semantic/build/packaged/javascript/semantic.js"></script>
 	<!-- In production use:
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
 	-->

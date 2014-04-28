@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="bower_components/semantic/build/packaged/css/semantic.css">
 	<link rel="stylesheet" href="css/app.css"/>
 </head>
-<body ng-controller="MainCtrl" ng-init="init()">
+<body ng-controller="MainCtrl" ng-init="init()" ng-swipe-right="showMenu()" ng-swipe-left="closeMenu()">
 	<div class="ui thin styled sidebar vertical menu">
 		<a href="" class="active item">
 			<i class="home icon"></i> Home
@@ -34,7 +34,7 @@
 
 	<header>
 		<a href="">
-			<div class="header-icon" ng-click="showMenu()">
+			<div class="header-icon" ng-click="toggleMenu()">
 				<i class="icon mobile"></i>CSM
 			</div>
 		</a>
@@ -54,6 +54,7 @@
 	-->
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-route/angular-route.js"></script>
+	<script src="bower_components/angular-touch/angular-touch.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/controllers.js"></script>

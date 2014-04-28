@@ -13,9 +13,36 @@
 	<link rel="stylesheet" href="bower_components/semantic/build/packaged/css/semantic.css">
 	<link rel="stylesheet" href="css/app.css"/>
 </head>
-<body>
+<body ng-controller="MainCtrl" ng-init="init()">
+	<div class="ui thin styled sidebar vertical menu">
+		<a href="" class="active item">
+			<i class="home icon"></i> Home
+		</a>
+		<a href="" class="item">
+			<i class="bullseye icon"></i> GET
+		</a>
+		<a href="" class="item">
+			<i class="mail icon"></i> Email
+		</a>
+		<a href="" class="item">
+			<i class="calendar icon"></i> Schedule
+		</a>
+		<a href="" class="item">
+			<i class="warning icon"></i> Announcement
+		</a>
+	</div>
+
 	<header>
-		<i class="icon mobile"></i>CSM <i class="icon settings header-right"></i>
+		<a href="">
+			<div class="header-icon" ng-click="showMenu()">
+				<i class="icon mobile"></i>CSM
+			</div>
+		</a>
+		<a href="">
+			<div class="header-right">
+				<i class="icon settings"></i>
+			</div>
+		</a>
 	</header>
 
 	<div ng-view></div>

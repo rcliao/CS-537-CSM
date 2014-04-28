@@ -11,6 +11,7 @@
     "angular-loader": "1.2.x",
     "angular-mocks": "~1.2.15",
     "angular-touch": "~1.2.x",
+    "angular-animate": "~1.2.x",
     "angular-bootstrap": "latest",
     "bootstrap": "latest",
     "semantic": "latest"

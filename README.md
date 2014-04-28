@@ -15,8 +15,9 @@ Cal State Mobile - mobile website for the Cal State university students.
 ### :waxing_gibbous_moon: Use Eclipse
 1. Under [Eclipse](http://eclipse.org), go to `file>import` select `Existing Maven Project`
 2. Select the `CS-537-CSM` folder for the **Root Directory**, and click finish
-3. To install all the dependencies, right click on the project `run as` and select `Maven install`
-4. To run the project, right click on the project `run as` and select `run on server` select `tomcat 7` as the server
+3. To run the project, right click on the project `run as` and select `maven build` 
+4. In the dialog, type in `tomcat:run` in the goal
+5. Open any browser of your choice, type in the following in the address `http://localhost:8080/csm/rest/hello/user`
 
 ### :+1: Use Terminal
 1. Download [maven](http://maven.apache.org/) if you are using windows.

@@ -33,7 +33,7 @@ angular.module('myApp.controllers', [])
 	.controller('LoginCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
 		$scope.login = function() {
 			$scope.loading = true;
-			$http.get('/rest/login')
+			$http.post('/rest/login')
 				.success(function() {
 					$scope.loading = false;
 				})

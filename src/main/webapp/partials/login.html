@@ -1,0 +1,23 @@
+<div class="ui left fluid icon input">
+	<input type="text" placeholder="Username" ng-model="user.username">
+	<i class="user icon"></i>
+</div>
+<div class="ui left fluid icon input">
+	<input type="password" placeholder="Password" ng-model="user.password">
+	<i class="key icon"></i>
+</div>
+
+<button class="ui csm fluid button" ng-click="login()" ng-disabled="loginError">
+	<span ng-hide="loading || loginError" class="animated fadeInLeft">
+		<i class="unlock alternate icon"></i>
+		Log-In
+	</span>
+	<span ng-show="loginError" class="animated fadeInLeft">
+		<i class="warning icon"></i>
+		Something went wrong :\
+	</span>
+	<span ng-show="loading" class="animated fadeInLeft">
+		<i class="loading icon"></i>
+		<span>Loading</span>
+	</span>
+</button>

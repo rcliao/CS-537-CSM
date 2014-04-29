@@ -14,6 +14,9 @@ import javax.ws.rs.core.MediaType;
 import org.csm.models.User;
 import org.csm.models.dao.UserDao;
 import org.csm.models.dao.jdbc.UserDaoImpl;
+import org.csm.models.JSONObjects.LoginSuccess;
+
+import com.google.gson.annotations.Expose;
 
 @Path("/login")
 public class LoginController {
@@ -21,23 +24,22 @@ public class LoginController {
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Object login(User user, @Context HttpServletRequest request){
+	public LoginSuccess login(User user, @Context HttpServletRequest request){
 		User u = null;
+		String message = "";
 		UserDao userdao = new UserDaoImpl();
 		try{
 			u = userdao.getUser(user.getUsername(), user.getPassword());
+			
 		}
-		catch(SQLException e){		
+		catch(SQLException e){	
+			message = e.getMessage();
 		}
 		if(u != null){
 			HttpSession session = request.getSession(true);
 			session.setAttribute("login-name", u.getUsername());
-			return new Object(){
-				public boolean Success = true;
-			};
+			return new LoginSuccess(true);
 		}
-		return new Object(){
-			public boolean Success = false;
-		};
+		return new LoginSuccess(false, message);
 	}
 }

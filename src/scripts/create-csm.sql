@@ -19,20 +19,25 @@ flush privileges;
 -- Table users
 -- -----------------------------------------------------
 CREATE  TABLE IF NOT EXISTS users (
-  id INT NOT NULL ,
+  id INT NOT NULL auto_increment ,
   username VARCHAR(45) ,
   password VARCHAR(45) ,
   first_name VARCHAR(45) NULL ,
   last_name VARCHAR(45) NULL ,
+  email VARCHAR(45) NULL,
   cin  INT NOT NULL,
-  PRIMARY KEY (id)
- );
+  PRIMARY KEY (id) );
 
 -- -----------------------------------------------------
 -- Insert into users
 -- -----------------------------------------------------
 
-insert into users values ('gpetros','student123','Gayaneh','Petrossian','999666333');
-insert into users values ('ebayazian','student123','Elnaz','Bayazian','123456789');
-insert into users values ('eliao','student123','Eric','Liao','888444222');
-insert into users values ('ssaeedi','student123','Saman','Saeedi','555666777');
+insert into users (username,password,first_name,last_name,email,cin) 
+        values('gpetros','student123','Gayaneh','Petrossian','gpetros@calstatla.edu',999666333);
+insert into users (username,password,first_name,last_name,email,cin) 
+       values ('ebayazian','student123','Elnaz','Bayazian','ebayazian@calsutatela.edu',123456789);
+insert into users (username,password,first_name,last_name,email,cin) 
+       values ('eliao','student123','Eric','Liao','eliao@calstatela.edu',888444222);
+insert into users (username,password,first_name,last_name,email,cin) 
+       values ('ssaeedi','student123','Saman','Saeedi','ssaeedi@calstatela.edu',555666777);
+

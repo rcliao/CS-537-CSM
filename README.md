@@ -29,23 +29,26 @@ Cal State Mobile - mobile website for the Cal State university students.
 .
 ├── pom.xml
 ├── README.md
-└── src
-    ├── main													--> where we put source codes
-    │   ├── java												--> Java source codes
-    │   │   └── org
-    │   │       └── csm
-    │   │           ├── controllers								--> controllers
-    │   │           ├── models									--> POJO models
-    │   │           │   └── dao									--> custom dao
-    │   │           └── providers								--> Magic
-    │   ├── resources
-    │   ├── scripts												--> SQL scripts
-    │   └── webapp												--> front end stuff
-    │       ├── index.html
-    │       └── WEB-INF
-    │           └── web.xml
-    └── test													--> where we put unit tests
-        ├── java
-        └── resources
+└── src								// where our source code goes
+   ├── main
+   │   ├── java							// Java source codes
+   │   ├── resources
+   │   └── webapp						// front end stuff
+   │       ├── bower_components					// bower componetns / front end libraries
+   │       ├── css						// css files
+   │       ├── img						// images
+   │       ├── index.html					// home page
+   │       ├── js						// angularjs logic
+   │       ├── lib						// extra libraries
+   │       ├── partials						// partial pages
+   │       ├── test						// karma test
+   │       └── WEB-INF
+   ├── scripts							// sql scripts
+   │   ├── create-csm.sql
+   │   └── drop-csm.sql
+   └── test							// JUnit Test
+       ├── java
+       │   └── org
+       └── resources
 
 ```

@@ -1,7 +1,6 @@
 'use strict';
 
 /* Controllers */
-
 angular.module('myApp.controllers', [])
 	.controller('MainCtrl', ['$scope', function($scope) {
 	  	$scope.init = function() {
@@ -32,6 +31,7 @@ angular.module('myApp.controllers', [])
 	}])
 	.controller('LoginCtrl', ['$scope', '$http', '$timeout', function($scope, $http, $timeout) {
 		$scope.login = function() {
+			// should be a directive
 			$scope.loading = true;
 			$http.post('/csm/rest/login')
 				.success(function() {

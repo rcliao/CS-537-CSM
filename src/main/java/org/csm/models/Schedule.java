@@ -3,6 +3,8 @@ package org.csm.models;
 import java.util.Date;
 import java.util.List;
 
+import org.csm.models.dao.Term;
+
 import com.google.gson.annotations.Expose;
 
 public class Schedule {
@@ -29,12 +31,11 @@ public class Schedule {
 	@Expose
 	private Course course;
 	@Expose
-	private List<Tuple<Date, Date>> startEndTimes;
-	@Expose
 	private int capacity;
 	@Expose
 	private Department department;
-	
+	@Expose
+	private Term term;
 	
 	public int getId() {
 		return id;
@@ -90,12 +91,6 @@ public class Schedule {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	public List<Tuple<Date, Date>> getStartEndTimes() {
-		return startEndTimes;
-	}
-	public void setStartEndTimes(List<Tuple<Date, Date>> startEndTimes) {
-		this.startEndTimes = startEndTimes;
-	}
 	public int getCapacity() {
 		return capacity;
 	}
@@ -107,6 +102,12 @@ public class Schedule {
 	}
 	public void setDepartment(Department department) {
 		this.department = department;
+	}
+	public Term getTerm() {
+		return term;
+	}
+	public void setTerm(Term term) {
+		this.term = term;
 	}
 	
 	

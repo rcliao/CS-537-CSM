@@ -11,13 +11,13 @@
 
 	<!-- Styles -->
 	<link rel="stylesheet" href="lib/animate.css/animate.css">
-	<link rel="stylesheet" href="lib/bootstrap/dist/css/bootstrap.css">
+	<link rel="stylesheet" href="lib/bootstrap/css/bootstrap.css">
 	<link rel="stylesheet" href="lib/semantic/build/packaged/css/semantic.css">
 	<link rel="stylesheet" href="css/app.css"/>
 </head>
 <body ng-controller="MainCtrl" ng-init="init()" ng-swipe-right="showMenu()" ng-swipe-left="closeMenu()">
 	<div class="ui thin styled sidebar vertical menu">
-		<a href="#" active-link="active" class="item">
+		<a href="#/login" active-link="active" class="item">
 			<i class="home icon"></i> Home
 		</a>
 		<a href="#/get" active-link="active" class="item">
@@ -52,7 +52,7 @@
 
 	<div class="main-content" ng-view></div>
 
-	<script src="lib/jquery/dist/jquery.js"></script>
+	<script src="lib/jquery/jquery.js"></script>
 	<script src="lib/semantic/build/packaged/javascript/semantic.js"></script>
 	<!-- In production use:
 	<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>

@@ -68,7 +68,50 @@
 		])
 		.controller('GETCtrl', ['$scope', 'Resources', '$timeout',
 			function($scope, Resources, $timeout) {
-				
+				$scope.terms = [
+					'Summer 2014',
+					'Fall 2014',
+					'Spring 2015'
+				];
+
+				$scope.term = $scope.terms[0];
+
+				$scope.searchStatus = 'search';
+
+				$scope.init = function() {
+					$('.ui.accordion')
+						.accordion()
+					;
+
+					$('.ui.quarter.dropdown')
+						.dropdown()
+					;
+				};
+
+				$scope.searchCourses = function() {
+					$scope.searchStatus = 'loading';
+
+					Resources.getSchedules(
+						{
+							'courseName': $scope.query,
+							'term': $scope.term
+						},
+						function(data) {
+							$scope.courses = data;
+
+							$scope.searchStatus = 'search';
+						},
+						function(err) {
+							$scope.errorMsg = err;
+
+							$scope.searchStatus = 'warning';
+
+							$timeout(function() {
+								$scope.searchStatus = 'search';
+							}, 2000);
+						}
+					);
+				};
 			}
 		]);
 }());

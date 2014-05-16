@@ -11,6 +11,7 @@ body {
 	background: #333;
 	color: #f3f781;
 	font-family: 'Cabin', Helvetica, Arial, sans-serif;
+	font-size: 1.8em;
 }
 
 header {
@@ -22,6 +23,9 @@ header {
 	padding: 0 20px;
 	border-bottom: 2px solid #ccc;
 }
+
+/* fixes for the angular bootstrap */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
 
 .header-icon {
 	float: left;
@@ -59,6 +63,7 @@ header {
 	height: 70px !important;
 	line-height: 42px !important;
 	font-family: 'Lobster', Georgia, Times, serif;
+	font-size: large;
 }
 
 .ui.vertical.menu .item > i.icon {
@@ -76,6 +81,7 @@ header {
 .ui.csm.button {
 	background: #f3f781;
 	color: #111;
+	font-size: medium;
 }
 
 .login-button.ng-show {

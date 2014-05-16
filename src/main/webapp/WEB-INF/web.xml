@@ -16,6 +16,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	
+	<!-- Mapping servlet to the rest web services -->
 	<servlet-mapping>
 		<servlet-name>CSM</servlet-name>
 		<url-pattern>/rest/*</url-pattern>

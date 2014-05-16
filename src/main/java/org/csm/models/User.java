@@ -5,11 +5,17 @@ import com.google.gson.annotations.Expose;
 public class User {
 	@Expose
 	private int id;
+	@Expose
 	private String firstName;
+	@Expose
 	private String lastName;
+	@Expose
 	private String username;
+	@Expose
 	private String password;
+	@Expose
 	private String email;
+	@Expose
 	private int cin;
 	
 	public User(int id, String firstName, String lastName, String username,

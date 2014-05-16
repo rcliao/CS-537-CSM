@@ -1,9 +1,12 @@
 package org.csm.models;
 
-public class Tuple<X, Y> {
+import com.google.gson.annotations.Expose;
 
-	public final X x;
-	public final Y y;
+public class Tuple<X, Y> {
+	@Expose
+	public X x;
+	@Expose
+	public Y y;
 
 	public Tuple(X x, Y y) {
 		this.x = x;

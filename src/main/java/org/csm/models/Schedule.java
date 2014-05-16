@@ -109,6 +109,21 @@ public class Schedule {
 	public void setTerm(Term term) {
 		this.term = term;
 	}
-	
+
+	public Schedule(int id, int classNumber, int section, String component,
+			String room, Date startDate, Date endDate, boolean status,
+			Course course, int capacity) {
+		super();
+		this.id = id;
+		this.classNumber = classNumber;
+		this.section = section;
+		this.component = component;
+		this.room = room;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
+		this.course = course;
+		this.capacity = capacity;
+	}
 	
 }

@@ -29,8 +29,6 @@ public class Schedule {
 	@Expose
 	private Course course;
 	@Expose
-	private List<Tuple<Date, Date>> startEndTimes;
-	@Expose
 	private int capacity;
 	@Expose
 	private Department department;
@@ -90,12 +88,7 @@ public class Schedule {
 	public void setCourse(Course course) {
 		this.course = course;
 	}
-	public List<Tuple<Date, Date>> getStartEndTimes() {
-		return startEndTimes;
-	}
-	public void setStartEndTimes(List<Tuple<Date, Date>> startEndTimes) {
-		this.startEndTimes = startEndTimes;
-	}
+	
 	public int getCapacity() {
 		return capacity;
 	}
@@ -108,6 +101,23 @@ public class Schedule {
 	public void setDepartment(Department department) {
 		this.department = department;
 	}
+	public Schedule(int id, int classNumber, int section, String component,
+			String room, Date startDate, Date endDate, boolean status,
+			Course course, int capacity) {
+		super();
+		this.id = id;
+		this.classNumber = classNumber;
+		this.section = section;
+		this.component = component;
+		this.room = room;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.status = status;
+		this.course = course;
+		this.capacity = capacity;
+	}
+	
+	
 	
 	
 }

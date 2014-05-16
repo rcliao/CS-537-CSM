@@ -4,6 +4,14 @@ import com.google.gson.annotations.Expose;
 
 public class Course {
 	
+	public Course(int id, String subject, int number, boolean credit, int units) {
+		super();
+		this.id = id;
+		this.subject = subject;
+		this.number = number;
+		this.credit = credit;
+		this.units = units;
+	}
 	public Course(){
 		
 	}

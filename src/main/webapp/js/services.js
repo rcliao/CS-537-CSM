@@ -23,11 +23,6 @@ angular.module('myApp.services', []).
         method: 'GET',
         params: {table: 'schedules'}
       },
-      getCourses:
-      {
-        method: 'GET',
-        params: {table: 'courses'}
-      },
       dropCourse:
       {
         method: 'DELETE',

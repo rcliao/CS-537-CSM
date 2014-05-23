@@ -28,5 +28,29 @@ config(['$routeProvider', function($routeProvider) {
 			controller: 'GETCtrl'
 		}
 	);
+	$routeProvider.when(
+		'/parking',
+		{
+			templateUrl: 'partials/parking.html',
+		}
+	);
+	$routeProvider.when(
+		'/schedule',
+		{
+			templateUrl: 'partials/schedule.html',
+		}
+	);
+	$routeProvider.when(
+		'/email',
+		{
+			templateUrl: 'partials/email.html',
+		}
+	);
+	$routeProvider.when(
+		'/announcements',
+		{
+			templateUrl: 'partials/announcements.html',
+		}
+	);
 	$routeProvider.otherwise({redirectTo: '/login'});
 }]);

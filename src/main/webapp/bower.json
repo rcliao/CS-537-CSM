@@ -13,6 +13,7 @@
     "angular-touch": "~1.2.x",
     "angular-animate": "~1.2.x",
     "angular-resource": "~1.2.x",
+    "angular-cookies": "~1.2.x",
     "angular-bootstrap": "latest",
     "bootstrap": "latest",
     "semantic": "latest"

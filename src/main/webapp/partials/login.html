@@ -7,6 +7,8 @@
 	<i class="key icon"></i>
 </div>
 
+{{user}}
+
 <button class="ui csm fluid button" ng-click="login()" ng-disabled="loginError">
 	<span ng-hide="loading || loginError" class="animated fadeInLeft">
 		<i class="unlock alternate icon"></i>
@@ -14,7 +16,7 @@
 	</span>
 	<span ng-show="loginError" class="animated fadeInLeft">
 		<i class="warning icon"></i>
-		Something went wrong :\
+		{{ loginErrorMsg }}
 	</span>
 	<span ng-show="loading" class="animated fadeInLeft">
 		<i class="loading icon"></i>

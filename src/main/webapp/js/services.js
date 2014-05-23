@@ -49,4 +49,64 @@ angular.module('myApp.services', []).
         params: {table: 'watchList'}
       }
   	});
+  })
+  .factory('Auth', function(Resources, $rootScope, $cookieStore){
+
+    var accessLevels = routingConfig.accessLevels,
+        userRoles = routingConfig.userRoles;
+
+    $rootScope.user = $cookieStore.get('user') || { username: '', role: userRoles.public };
+
+    $rootScope.accessLevels = accessLevels;
+    $rootScope.userRoles = userRoles;
+
+    return {
+      authorize: function(accessLevel, role) {
+        if(role === undefined)
+          role = $rootScope.user.role;
+
+        return accessLevel & role;
+      },
+      isLoggedIn: function(user) {
+        if(user === undefined)
+          user = $rootScope.user;
+
+        return user.role === userRoles.student || user.role === userRoles.admin;
+      },
+      login: function(user, successCallBack, errorCallBack) {
+        Resources.login(
+          {
+            'username': user.username,
+            // this btoa function will encode String to Base64
+            'password': user.password
+          },
+          function() {
+            // success callback
+            $rootScope.user = user;
+            $rootScope.user.role = userRoles.student;
+            $cookieStore.put('user', $rootScope.user);
+
+            successCallBack();
+          },
+          function(response) {
+            if (response.status == 401) {
+              // 401 error case
+              errorCallBack('Username and password does not match');
+            } else if (response.status == 404) {
+              errorCallBack('Username does not exist');
+            } else if (response.status == 500) {
+              errorCallBack('Oops, there is something wrong with server.');
+            }
+          }
+        );
+      },
+      logout: function(callback) {
+        $cookieStore.remove('user');
+        $rootScope.user = {username: '', role: userRoles.public};
+
+        callback();
+      },
+      accessLevels: accessLevels,
+      userRoles: userRoles
+    };
   });

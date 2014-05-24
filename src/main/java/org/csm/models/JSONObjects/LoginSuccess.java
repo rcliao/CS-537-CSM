@@ -1,4 +1,4 @@
-package org.csm.models.JsonObjects;
+package org.csm.models.JSONObjects;
 
 import com.google.gson.annotations.Expose;
 

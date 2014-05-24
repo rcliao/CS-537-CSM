@@ -28,8 +28,9 @@ public class UserDaoImpl implements UserDao {
 			User user=null;
 			if (rs.getRow() != 0)
 			{
-				 user = new User(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
-						                       rs.getString(5),rs.getInt(7)) ;
+				 user = new User(rs.getInt("id"), rs.getString("first_name"), rs.getString("last_name"),
+						         rs.getString("username"),  rs.getString("password"),rs.getString("email"),
+						         rs.getInt("cin")) ;
 			
 			}
 			c.close();

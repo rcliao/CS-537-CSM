@@ -11,6 +11,7 @@ body {
 	background: #333;
 	color: #f3f781;
 	font-family: 'Cabin', Helvetica, Arial, sans-serif;
+	font-size: 1.8em;
 }
 
 header {
@@ -18,15 +19,22 @@ header {
 	line-height: 60px;
 	font-size: 2em;
 	height: 60px;
+	background: #cccccc;
 	background: rgba(255, 255, 255, 0.1);
-	padding: 0 20px;
 	border-bottom: 2px solid #ccc;
+}
+
+/* fixes for the angular bootstrap */
+.nav,
+.pagination,
+.carousel,
+.panel-title a {
+	cursor: pointer;
 }
 
 .header-icon {
 	float: left;
 	padding-right: 20px;
-	border-right: 1px solid #666;
 }
 
 .header-right {
@@ -59,6 +67,7 @@ header {
 	height: 70px !important;
 	line-height: 42px !important;
 	font-family: 'Lobster', Georgia, Times, serif;
+	font-size: large;
 }
 
 .ui.vertical.menu .item > i.icon {
@@ -76,6 +85,7 @@ header {
 .ui.csm.button {
 	background: #f3f781;
 	color: #111;
+	font-size: medium;
 }
 
 .login-button.ng-show {
@@ -99,4 +109,42 @@ header {
 a {
 	color: inherit;
 	text-decoration: none;
+}
+
+.tab-content {
+	padding: 10px;
+}
+
+.panel {
+	background: rgba(255,255,255,0.1);
+}
+
+.panel-default > .panel-heading {
+	background: rgba(255,255,255,0.2);
+}
+
+.ui.dropdown .menu .item {
+	font-size: medium;
+}
+
+.csula-color {
+	color: #909030 !important;
+}
+
+.ui.checkbox label {
+	color: #f3f781 !important;
+}
+
+.right-floating {
+	float: right;
+	margin-top: 15px !important;
+	margin-right: 5px !important;
+}
+
+.right-floating:after {
+	clear: both;
+}
+
+.ui.list .description {
+	color: #f3f781;
 }

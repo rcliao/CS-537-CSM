@@ -14,7 +14,7 @@ import javax.ws.rs.core.MediaType;
 import org.csm.models.User;
 import org.csm.models.dao.UserDao;
 import org.csm.models.dao.jdbc.UserDaoImpl;
-import org.csm.models.JSONObjects.LoginSuccess;
+import org.csm.models.JsonObjects.LoginSuccess;
 
 import com.google.gson.annotations.Expose;
 

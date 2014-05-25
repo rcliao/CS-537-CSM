@@ -11,6 +11,7 @@ import java.sql.SQLException;
 
 import org.csm.models.Course;
 import org.csm.models.Schedule;
+import org.csm.models.Term;
 import org.csm.models.User;
 import org.csm.models.dao.ScheduleDao;
 
@@ -80,15 +81,69 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	}
 
 	@Override
-	public void enroll(User u, Integer scheduleId) {
-		// TODO Auto-generated method stub
+	public void enroll(User u,Term term, Integer scheduleId) {
+		String url = "jdbc:mysql://localhost/csm";
+		String myUsername = "csm_admin";
+		String myPassword = "csm_admin";
+		Connection c;
+		try {
+			c = DriverManager.getConnection(url, myUsername, myPassword);
 		
+		// Enrollment status: 1- 'Enrollment Authorized' 	--> ('EA')
+		//                    2-'Enrollment Unauthorized'	--> ('EU')
+		//                    3-'Course-Selected'			--> ('CS')
+		//                    4-'Course-Added'				--> ('CA')
+		//                    5-'Course-Dropped'			--> ('CD')
+		//                    6='Course-Withdrawn			--> ('CW')
+		//                    7-'Course-Passed				--> ('CP')
+		//                    8-'Course-Failed				--> ('CF')
+		
+		String sqlStatement = "insert into enrollments (term,status,users_id,schedule_id)" +
+								"values(?,?,?,?); ";
+		PreparedStatement stmt = c.prepareStatement(sqlStatement);
+		stmt.setInt(1,term.getId());
+		stmt.setString(2, "CA");
+		stmt.setInt(3,u.getId());
+		stmt.setInt(4,scheduleId);
+		Boolean rs = stmt.execute();
+		// update schedule table if user enrolled in course
+		sqlStatement = "update schedule set capacity=capacity-1 ," +
+						"status=case when capacity<=1 then false else true end where id=?;" ;
+		stmt=c.prepareStatement(sqlStatement);
+		stmt.setInt(1, scheduleId);
+		rs = stmt.execute();
+		c.close();
+		} catch (SQLException e) {
+			System.err.println("SQL Exception");
+		    System.err.println(e.getMessage());
+		}
+	
 	}
 
 	@Override
-	public void unEnroll(User u, Integer scheduleId) {
-		// TODO Auto-generated method stub
+	public void unEnroll(User u,Term term, Integer scheduleId) {
+		String url = "jdbc:mysql://localhost/csm";
+		String myUsername = "csm_admin";
+		String myPassword = "csm_admin";
+		Connection c;
+		try {
+			c = DriverManager.getConnection(url, myUsername, myPassword);
+		String sqlStatement = "delete from enrollment where users_id=? and schedule_id=? and term=?";
+		PreparedStatement stmt = c.prepareStatement(sqlStatement);
+		stmt.setInt(1, u.getId());
+		stmt.setInt(2,scheduleId);
+		stmt.setInt(3, term.getId());
+	    Boolean rs = stmt.execute();
+	    sqlStatement = "update schedule set capacity=capacity+1 ," +
+				"status=case when capacity<=0 then false else true end where id=? ;" ;
+	    stmt=c.prepareStatement(sqlStatement);
+	    stmt.setInt(1, scheduleId);
+	    rs = stmt.execute();
+		} catch (SQLException e) {
+			System.err.println("SQL Exception");
+		    System.err.println(e.getMessage());
 		
+		}
 	}
 
 	@Override

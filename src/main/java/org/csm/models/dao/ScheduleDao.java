@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.csm.models.Schedule;
+import org.csm.models.Term;
 import org.csm.models.User;
 
 public interface ScheduleDao {
@@ -14,7 +15,9 @@ public interface ScheduleDao {
 	//public List<Schedule> getSchedules(String courseName) throws SQLException;
 	public List<Schedule> getSchedulesDistinct(String courseName, String term) throws SQLException;
 	//enroll User u in the schedule 
-	public void enroll(User u, Integer scheduleId);
+	void enroll(User u, Term term, Integer scheduleId);
 	//UnEnroll User u in the schedule
-	public void unEnroll(User u, Integer scheduleId);
+	void unEnroll(User u, Term term, Integer scheduleId);
+	
+			
 }

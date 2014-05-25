@@ -1,4 +1,4 @@
-package org.csm.models.dao;
+package org.csm.models;
 
 import com.google.gson.annotations.Expose;
 

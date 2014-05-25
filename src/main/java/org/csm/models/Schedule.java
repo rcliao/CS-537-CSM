@@ -3,7 +3,6 @@ package org.csm.models;
 import java.util.Date;
 import java.util.List;
 
-import org.csm.models.dao.Term;
 
 import com.google.gson.annotations.Expose;
 

@@ -81,7 +81,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	}
 
 	@Override
-	public void enroll(User u,Term term, Integer scheduleId) {
+	public void enroll(User u,String term, Integer scheduleId) {
 		String url = "jdbc:mysql://localhost/csm";
 		String myUsername = "csm_admin";
 		String myPassword = "csm_admin";
@@ -97,11 +97,18 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		//                    6='Course-Withdrawn			--> ('CW')
 		//                    7-'Course-Passed				--> ('CP')
 		//                    8-'Course-Failed				--> ('CF')
-		
-		String sqlStatement = "insert into enrollments (term,status,users_id,schedule_id)" +
-								"values(?,?,?,?); ";
+			
+		// fetching the term to get id
+		String sqlStatement = "select * from term where description = ? ;";
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
-		stmt.setInt(1,term.getId());
+		stmt.setString(1, term);
+		ResultSet result = stmt.executeQuery();
+		Integer id = result.getInt("id");
+		// preparing statement to insert the course into enrollement
+		sqlStatement = "insert into enrollments (term,status,users_id,schedule_id)" +
+								"values(?,?,?,?); ";
+		stmt = c.prepareStatement(sqlStatement);
+		stmt.setInt(1,id);
 		stmt.setString(2, "CA");
 		stmt.setInt(3,u.getId());
 		stmt.setInt(4,scheduleId);
@@ -121,18 +128,23 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	}
 
 	@Override
-	public void unEnroll(User u,Term term, Integer scheduleId) {
+	public void unEnroll(User u,String term, Integer scheduleId) {
 		String url = "jdbc:mysql://localhost/csm";
 		String myUsername = "csm_admin";
 		String myPassword = "csm_admin";
 		Connection c;
 		try {
 			c = DriverManager.getConnection(url, myUsername, myPassword);
-		String sqlStatement = "delete from enrollment where users_id=? and schedule_id=? and term=?";
+		String sqlStatement = "select * from term where description = ? ;";
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
+		stmt.setString(1, term);
+		ResultSet result = stmt.executeQuery();
+		Integer id = result.getInt("id");
+		sqlStatement = "delete from enrollment where users_id=? and schedule_id=? and term=?";
+		stmt = c.prepareStatement(sqlStatement);
 		stmt.setInt(1, u.getId());
 		stmt.setInt(2,scheduleId);
-		stmt.setInt(3, term.getId());
+		stmt.setInt(3, id);
 	    Boolean rs = stmt.execute();
 	    sqlStatement = "update schedule set capacity=capacity+1 ," +
 				"status=case when capacity<=0 then false else true end where id=? ;" ;

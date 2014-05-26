@@ -15,9 +15,10 @@ public interface ScheduleDao {
 	//public List<Schedule> getSchedules(String courseName) throws SQLException;
 	public List<Schedule> getSchedulesDistinct(String courseName, String term) throws SQLException;
 	//enroll User u in the schedule 
-	void enroll(User u, Term term, Integer scheduleId);
+	void enroll(User u, String term, Integer scheduleId);
 	//UnEnroll User u in the schedule
-	void unEnroll(User u, Term term, Integer scheduleId);
+	void unEnroll(User u, String term, Integer scheduleId);
+
 	
 			
 }

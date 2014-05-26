@@ -11,8 +11,8 @@ import org.csm.models.dao.UserDao;
 
 public class UserDaoImpl implements UserDao {
 	@Override
-
 	// login validation
+
 	public User getUser(String username, String password) throws SQLException{
 			String url = "jdbc:mysql://localhost/csm";
 			String myUsername = "csm_admin";
@@ -37,7 +37,7 @@ public class UserDaoImpl implements UserDao {
 			return user;
 	
 		
-		
+
 
 	}
 

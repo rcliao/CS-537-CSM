@@ -205,7 +205,7 @@ CREATE INDEX `fk_faculty_departments1_idx` ON `csm`.`faculty` (`departments_id` 
 -- -----------------------------------------------------
 -- Table `csm`.`watchlist`
 -- -----------------------------------------------------
-<<<<<<< HEAD
+
 
 CREATE TABLE IF NOT EXISTS `csm`.`watchlist` (
   `id` INT NOT NULL auto_increment,

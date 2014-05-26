@@ -83,28 +83,4 @@ config(['$routeProvider', function($routeProvider) {
 	});
 
 	$rootScope.appInitialized = true;
-}])
-.run(function($httpBackend) {
-	//Escape string to be able to use it in a regular expression
-	function regEsc(str) {
-		return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-	};
-
-	//When backend receives a request to the views folder, pass it through
-    $httpBackend.whenGET(
-    	RegExp(
-    		regEsc(
-    			'partials/'
-    		)
-    	)
-    ).passThrough();
-
-	$httpBackend.whenPOST('/csm/rest/login').respond(function(method, url, data){
-		var user = JSON.parse(data);
-		if (user.username === 'eliao' && user.password === 'abcd') {
-			return [200, {success: 'true'}, {}];
-		} else {
-			return [401, {}, {}];
-		}
-	});
-});
+}]);

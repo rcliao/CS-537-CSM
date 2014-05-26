@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -23,7 +24,7 @@ import org.csm.models.dao.jdbc.ScheduleDaoImpl;
 
 @Path("/GET")
 public class GETController {
-	@POST
+	@GET
 	@Path("/schedules/{courseName}/{term}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Schedule> getSchedules(
@@ -41,11 +42,11 @@ public class GETController {
 		if (term == null || term.isEmpty()) {
 			Calendar c = Calendar.getInstance();
 			int month = c.get(Calendar.MONTH);
-			if (month < 4)
+			if (month < 3)
 				term = "winter ";
-			else if (month < 7)
+			else if (month < 6)
 				term = "spring ";
-			else if (month < 10)
+			else if (month < 9)
 				term = "summer ";
 			else
 				term = "fall ";
@@ -60,7 +61,7 @@ public class GETController {
 		return null;
 	}
 
-	@POST
+	@GET
 	@Path("/schedules/{courseName}/{term}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Schedule> getSchedules(
@@ -79,11 +80,11 @@ public class GETController {
 		if (term == null || term.isEmpty()) {
 			Calendar c = Calendar.getInstance();
 			int month = c.get(Calendar.MONTH);
-			if (month < 4)
+			if (month < 3)
 				term = "winter ";
-			else if (month < 7)
+			else if (month < 6)
 				term = "spring ";
-			else if (month < 10)
+			else if (month < 9)
 				term = "summer ";
 			else
 				term = "fall ";
@@ -114,11 +115,11 @@ public class GETController {
 			String term = "";
 			Calendar c = Calendar.getInstance();
 			int month = c.get(Calendar.MONTH);
-			if (month < 4)
+			if (month < 3)
 				term = "winter ";
-			else if (month < 7)
+			else if (month < 6)
 				term = "spring ";
-			else if (month < 10)
+			else if (month < 9)
 				term = "summer ";
 			else
 				term = "fall ";
@@ -145,11 +146,11 @@ public class GETController {
 			String term = "";
 			Calendar c = Calendar.getInstance();
 			int month = c.get(Calendar.MONTH);
-			if (month < 4)
+			if (month < 3)
 				term = "winter ";
-			else if (month < 7)
+			else if (month < 6)
 				term = "spring ";
-			else if (month < 10)
+			else if (month < 9)
 				term = "summer ";
 			else
 				term = "fall ";

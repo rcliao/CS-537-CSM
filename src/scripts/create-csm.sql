@@ -238,7 +238,7 @@ CREATE INDEX `fk_enrollement_users1_idx` ON `csm`.`watchlist` (`users_id` ASC);
 CREATE INDEX `fk_watchlist_terms1_idx` ON `csm`.`watchlist` (`term` ASC);
 
 CREATE INDEX `fk_watchlist_schedule1_idx` ON `csm`.`watchlist` (`schedule_id` ASC, `schedule_courses_id` ASC, `schedule_department_id` ASC, `schedule_term` ASC);
-=======
+
 CREATE  TABLE IF NOT EXISTS users (
   id INT NOT NULL auto_increment ,
   username VARCHAR(45) ,
@@ -248,7 +248,7 @@ CREATE  TABLE IF NOT EXISTS users (
   email VARCHAR(45) NULL,
   cin  INT NOT NULL,
   PRIMARY KEY (id) );
->>>>>>> 27b76de762cfeae2578439dac58b124a7492d7ab
+
 
 -- -----------------------------------------------------
 -- Insert into users
@@ -263,7 +263,6 @@ insert into users (username,password,first_name,last_name,email,cin)
 insert into users (username,password,first_name,last_name,email,cin) 
        values ('ssaeedi','student123','Saman','Saeedi','ssaeedi@calstatela.edu',555666777);
 
-<<<<<<< HEAD
 -- -----------------------------------------------------
 -- Insert into Term
 -- -----------------------------------------------------
@@ -320,5 +319,4 @@ insert into faculty (`title`,`first_name` ,`last_name`, `office_room_number` ,`o
 insert into faculty (`title`,`first_name` ,`last_name`, `office_room_number` ,`office_phone`,
 					`email` ,  `web_url` ,  `departments_id` )
 			values ('Dr.','Chengyu','Sun',' E&T A-317',' (323) 343-6697','csun@calstatela.edu','e: http://sun.calstatela.edu/~cysun/www/index.html',1);
-=======
->>>>>>> 27b76de762cfeae2578439dac58b124a7492d7ab
+

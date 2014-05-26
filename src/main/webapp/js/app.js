@@ -9,7 +9,6 @@ angular.module('myApp', [
 	'ngResource',
 	'ngCookies',
 	'ui.bootstrap',
-	'ngMockE2E',
 	'myApp.filters',
 	'myApp.services',
 	'myApp.directives',

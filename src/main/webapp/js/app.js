@@ -31,7 +31,7 @@ config(['$routeProvider', function($routeProvider) {
 		'/home',
 		{
 			templateUrl: 'partials/home.html',
-			access: access.admin
+			access: access.student
 		}
 	);
 	$routeProvider.when(

@@ -20,7 +20,7 @@
         accessLevels : {
             'public' : '*',
             'student' : ['student'],
-            'admin': ['student', 'admin']
+            'admin': ['admin']
         }
 
     };

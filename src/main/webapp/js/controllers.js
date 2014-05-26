@@ -42,6 +42,10 @@
 		])
 		.controller('LoginCtrl', ['$scope', 'Resources', '$timeout', 'Auth', '$location',
 			function($scope, Resources, $timeout, Auth, $location) {
+				if ($scope.user.role > 1) {
+					$location.path('/home');
+				}
+
 				$scope.login = function() {
 					// should be a directive
 					$scope.loading = true;

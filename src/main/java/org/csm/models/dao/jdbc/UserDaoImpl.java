@@ -15,8 +15,8 @@ public class UserDaoImpl implements UserDao {
 
 	public User getUser(String username, String password) throws SQLException{
 			String url = "jdbc:mysql://localhost/csm";
-			String myUsername = "root";
-			String myPassword = "abcd";
+			String myUsername = "csm_admin";
+			String myPassword = "csm_admin";
 			String sqlStatement;
 			Connection c = DriverManager.getConnection(url, myUsername, myPassword);
 			sqlStatement="select * from users where username=? and password=? ;";

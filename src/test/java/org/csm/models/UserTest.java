@@ -27,7 +27,7 @@ public class UserTest {
 		assert u.getPassword().equals("student123");
 		assert u.getFirstName().equals("Saman");
 		assert u.getLastName().equals("Saeedi");
-		assert u.getEmail().equalsIgnoreCase("ssaeedi1367@gmail.com");
+		assert u.getEmail().equalsIgnoreCase("ssaeedi@calstatela.edu");
 		assert u.getCin() == 555666777;
 	}
 

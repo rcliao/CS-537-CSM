@@ -40,16 +40,20 @@
 				};
 			}
 		])
-		.controller('LoginCtrl', ['$scope', 'Resources', '$timeout',
-			function($scope, Resources, $timeout) {
+		.controller('LoginCtrl', ['$scope', 'Resources', '$timeout', 'Auth', '$location',
+			function($scope, Resources, $timeout, Auth, $location) {
+				if ($scope.user.role > 1) {
+					$location.path('/home');
+				}
+
 				$scope.login = function() {
 					// should be a directive
 					$scope.loading = true;
-					Resources.login(
-						{},
+					Auth.login(
 						$scope.user,
 						function() {
 							$scope.loading = false;
+							$location.path('/home');
 						},
 						function(err) {
 							$scope.loading = false;

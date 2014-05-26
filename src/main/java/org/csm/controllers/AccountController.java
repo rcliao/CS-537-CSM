@@ -23,7 +23,7 @@ import com.google.gson.annotations.Expose;
 public class AccountController {
 	
 	@POST
-	@Path("login")
+	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public LoginSuccess login(User user, @Context HttpServletRequest request, @Context HttpServletResponse response){
@@ -54,7 +54,7 @@ public class AccountController {
 		return new LoginSuccess(success, message);
 	}
 	@POST
-	@Path("logout")
+	@Path("/logout")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public LoginSuccess logout(User user, @Context HttpServletRequest request, @Context HttpServletResponse response){

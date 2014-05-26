@@ -59,6 +59,7 @@ public class GETController {
 		}
 		return null;
 	}
+
 	@POST
 	@Path("/schedules/{courseName}/{term}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -79,13 +80,13 @@ public class GETController {
 			Calendar c = Calendar.getInstance();
 			int month = c.get(Calendar.MONTH);
 			if (month < 4)
-				term = "winter";
+				term = "winter ";
 			else if (month < 7)
-				term = "spring";
+				term = "spring ";
 			else if (month < 10)
-				term = "summer";
+				term = "summer ";
 			else
-				term = "fall";
+				term = "fall ";
 			term += c.get(Calendar.YEAR);
 		}
 		try {
@@ -95,39 +96,65 @@ public class GETController {
 			e.printStackTrace();
 		}
 		return null;
-	}	
+	}
+
 	@POST
 	@Path("/enroll/{scheduleId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String enroll(@PathParam("courseId") Integer scheduleId, @Context HttpServletRequest request,
-			@Context HttpServletResponse response){
+	public String enroll(@PathParam("courseId") Integer scheduleId,
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
 		ScheduleDao scheduleDao = new ScheduleDaoImpl();
 		HttpSession session = request.getSession(true);
 		User u = (User) session.getAttribute("loginUser");
 		if (u == null) {
 			response.setStatus(401);
 			return null;
-		}
-		else{
-			scheduleDao.enroll(u, scheduleId);
+		} else {
+			String term = "";
+			Calendar c = Calendar.getInstance();
+			int month = c.get(Calendar.MONTH);
+			if (month < 4)
+				term = "winter ";
+			else if (month < 7)
+				term = "spring ";
+			else if (month < 10)
+				term = "summer ";
+			else
+				term = "fall ";
+			term += c.get(Calendar.YEAR);
+			scheduleDao.enroll(u, term, scheduleId);
 		}
 		response.setStatus(201);
 		return null;
 	}
+
 	@DELETE
 	@Path("/enroll/{scheduleId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String UnEnroll(@PathParam("courseId") Integer scheduleId, @Context HttpServletRequest request,
-			@Context HttpServletResponse response){
+	public String UnEnroll(@PathParam("courseId") Integer scheduleId,
+			@Context HttpServletRequest request,
+			@Context HttpServletResponse response) {
 		ScheduleDao scheduleDao = new ScheduleDaoImpl();
 		HttpSession session = request.getSession(true);
 		User u = (User) session.getAttribute("loginUser");
 		if (u == null) {
 			response.setStatus(401);
 			return null;
-		}
-		else{
-			scheduleDao.unEnroll(u, scheduleId);
+		} else {
+			String term = "";
+			Calendar c = Calendar.getInstance();
+			int month = c.get(Calendar.MONTH);
+			if (month < 4)
+				term = "winter ";
+			else if (month < 7)
+				term = "spring ";
+			else if (month < 10)
+				term = "summer ";
+			else
+				term = "fall ";
+			term += c.get(Calendar.YEAR);
+			scheduleDao.unEnroll(u, term, scheduleId);
 		}
 		response.setStatus(201);
 		return null;

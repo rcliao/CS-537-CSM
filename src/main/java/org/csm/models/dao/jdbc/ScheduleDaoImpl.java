@@ -88,7 +88,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		Connection c;
 		try {
 			c = DriverManager.getConnection(url, myUsername, myPassword);
-		
+
 		// Enrollment status: 1- 'Enrollment Authorized' 	--> ('EA')
 		//                    2-'Enrollment Unauthorized'	--> ('EU')
 		//                    3-'Course-Selected'			--> ('CS')
@@ -97,7 +97,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		//                    6='Course-Withdrawn			--> ('CW')
 		//                    7-'Course-Passed				--> ('CP')
 		//                    8-'Course-Failed				--> ('CF')
-			
+
 		// fetching the term to get id
 		String sqlStatement = "select * from term where description = ? ;";
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
@@ -124,7 +124,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 			System.err.println("SQL Exception");
 		    System.err.println(e.getMessage());
 		}
-	
+
 	}
 
 	@Override
@@ -154,7 +154,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		} catch (SQLException e) {
 			System.err.println("SQL Exception");
 		    System.err.println(e.getMessage());
-		
+
 		}
 	}
 

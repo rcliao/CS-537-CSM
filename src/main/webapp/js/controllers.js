@@ -97,7 +97,7 @@
 
 					Resources.getSchedules(
 						{
-							'courseName': $scope.query,
+							'name': $scope.query,
 							'term': $scope.term
 						},
 						function(data) {

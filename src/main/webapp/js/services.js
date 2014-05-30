@@ -8,7 +8,7 @@
 angular.module('myApp.services', []).
   value('version', '0.1')
   .factory('Resources', function($resource) {
-  	return $resource('/csm/rest/:table',
+  	return $resource('/csm/rest/:table/:operation/:name/:term',
   	{
 
   	},
@@ -16,12 +16,12 @@ angular.module('myApp.services', []).
   		login:
   		{
   			method: 'POST',
-  			params: {table: 'login'}
+  			params: {table: 'Account', operation: 'login'}
   		},
       getSchedules:
       {
         method: 'GET',
-        params: {table: 'schedules'}
+        params: {table: 'GET', operation: 'schedules' }
       },
       dropCourse:
       {

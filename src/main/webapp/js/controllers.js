@@ -4,8 +4,8 @@
 
 	/* Controllers */
 	angular.module('myApp.controllers', [])
-		.controller('MainCtrl', ['$scope', '$rootScope',
-			function($scope, $rootScope) {
+		.controller('MainCtrl', ['$scope', '$rootScope', 'Auth',
+			function($scope, $rootScope, Auth) {
 			  	$scope.init = function() {
 					$('.ui.sidebar')
 						.sidebar()
@@ -37,6 +37,14 @@
 					$('.ui.sidebar')
 						.sidebar('toggle')
 					;
+				};
+
+				$scope.logout = function() {
+					var logoutCallback = function() {
+
+					};
+
+					Auth.logout(logoutCallback);
 				};
 			}
 		])
@@ -115,6 +123,41 @@
 							}, 2000);
 						}
 					);
+				};
+			}
+		])
+		.controller('EmailCtrl', ['$scope', 'Resources',
+			function($scope) {
+				$scope.init = function() {
+					var advancedEditor;
+
+					advancedEditor = new Quill('.advanced-wrapper .editor-container', {
+						modules: {
+							'toolbar': {
+								container: '.advanced-wrapper .toolbar-container'
+							},
+							'link-tooltip': true,
+							'image-tooltip': true,
+							},
+							theme: 'snow'
+						});
+
+					advancedEditor.addStyles({
+						'body': { 'color': '#fff' }
+					});
+
+					advancedEditor.on('selection-change', function(range) {
+						return console.info('advanced', 'selection', range);
+					});
+
+					advancedEditor.on('text-change', function(delta, source) {
+					var sourceDelta, targetDelta;
+					console.info('advanced', 'text', delta, source);
+					if (source === 'api') {
+						return;
+					}
+					sourceDelta = advancedEditor.getContents();
+					});
 				};
 			}
 		]);

@@ -23,43 +23,7 @@ import org.csm.models.dao.ScheduleDao;
 import org.csm.models.dao.jdbc.ScheduleDaoImpl;
 
 @Path("/GET")
-public class GETController {
-	// @GET
-	// @Path("/schedules/{courseName}/{term}")
-	// @Produces(MediaType.APPLICATION_JSON)
-	// public List<Schedule> getSchedules(
-	// 		@PathParam("courseName") String courseName,
-	// 		@PathParam("term") String term,
-	// 		@Context HttpServletRequest request,
-	// 		@Context HttpServletResponse response) {
-	// 	ScheduleDao schedule = new ScheduleDaoImpl();
-	// 	HttpSession session = request.getSession(true);
-	// 	User u = (User) session.getAttribute("loginUser");
-	// 	if (u == null) {
-	// 		response.setStatus(401);
-	// 		return null;
-	// 	}
-	// 	if (term == null || term.isEmpty()) {
-	// 		Calendar c = Calendar.getInstance();
-	// 		int month = c.get(Calendar.MONTH);
-	// 		if (month < 3)
-	// 			term = "winter ";
-	// 		else if (month < 6)
-	// 			term = "spring ";
-	// 		else if (month < 9)
-	// 			term = "summer ";
-	// 		else
-	// 			term = "fall ";
-	// 		term += c.get(Calendar.YEAR);
-	// 	}
-	// 	try {
-	// 		return schedule.getSchedules(courseName, term);
-	// 	} catch (SQLException e) {
-	// 		// TODO Auto-generated catch block
-	// 		e.printStackTrace();
-	// 	}
-	// 	return null;
-	// }
+public class GETController {	
 
 	@GET
 	@Path("/schedules/{courseName}/{term}")
@@ -72,11 +36,13 @@ public class GETController {
 			@Context HttpServletResponse response) {
 		ScheduleDao schedule = new ScheduleDaoImpl();
 		HttpSession session = request.getSession(true);
-		User u = (User) session.getAttribute("loginUser");
+		User u = (User) session.getAttribute("loginUser");		
 		if (u == null) {
+			System.out.println("user does not exist");
 			response.setStatus(401);
 			return null;
 		}
+		System.out.println("user does exist");
 		if (term == null || term.isEmpty()) {
 			Calendar c = Calendar.getInstance();
 			int month = c.get(Calendar.MONTH);
@@ -91,6 +57,7 @@ public class GETController {
 			term += c.get(Calendar.YEAR);
 		}
 		try {
+			System.out.println("try");
 			return schedule.getSchedules(courseName, available, term);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

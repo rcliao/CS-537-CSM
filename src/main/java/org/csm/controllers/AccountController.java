@@ -1,16 +1,15 @@
 package org.csm.controllers;
 
 import java.sql.SQLException;
+import java.lang.Throwable;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.WebApplicationException;
 
 import org.csm.models.User;
 import org.csm.models.dao.UserDao;
@@ -21,45 +20,44 @@ import com.google.gson.annotations.Expose;
 
 @Path("/Account")
 public class AccountController {
-	
+
 	@POST
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public LoginSuccess login(User user, @Context HttpServletRequest request, @Context HttpServletResponse response){
+	public LoginSuccess login(User user){
 		User u = null;
 		String message = "";
 		boolean success = false;
 		UserDao userdao = new UserDaoImpl();
 		try{
+			System.out.println("user password: " + user.getPassword());
+			// get user from user dao
 			u = userdao.getUser(user.getUsername());
+
 			if(u == null){
-				response.setStatus(404);
-				message = "User does not exist";
+				throw new WebApplicationException(
+					new Throwable("User does not exist"),
+					404
+				);
 			}
 			else if(!u.getPassword().equals(user.getPassword())){
-				response.setStatus(401);
-				message = "Password is incorrect";
+				throw new WebApplicationException(
+					new Throwable("Username/password do not match"),
+					401
+				);
 			}
 			else{
-				HttpSession session = request.getSession(true);
-				session.setAttribute("loginUser", u);
 				success = true;
+				message = "Login Successes";
 			}
 		}
-		catch(SQLException e){	
-			message = e.getMessage();
-			response.setStatus(500);
-		}		
+		catch(SQLException e){
+			throw new WebApplicationException(
+				new Throwable(e.getMessage()),
+				503
+			);
+		}
 		return new LoginSuccess(success, message);
-	}
-	@POST
-	@Path("/logout")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public LoginSuccess logout(User user, @Context HttpServletRequest request, @Context HttpServletResponse response){
-		HttpSession session = request.getSession();
-		session.invalidate();
-		return new LoginSuccess(true, "");
 	}
 }

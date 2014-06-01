@@ -30,7 +30,7 @@ config(['$routeProvider', function($routeProvider) {
 		'/home',
 		{
 			templateUrl: 'partials/home.html',
-			access: access.student
+			access: access.public
 		}
 	);
 	$routeProvider.when(
@@ -59,6 +59,7 @@ config(['$routeProvider', function($routeProvider) {
 		'/email',
 		{
 			templateUrl: 'partials/email.html',
+			controller: 'EmailCtrl',
 			access: access.student
 		}
 	);

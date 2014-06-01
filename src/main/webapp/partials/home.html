@@ -6,4 +6,10 @@
 		Cal State Los Angeles students so that students don't need to login to
 		various services with all different accounts.
 	</p>
+	<p ng-show="user.username">
+		Hi, {{user.username}} <a href="" ng-click="logout()">logout here</a>.
+	</p>
+	<p ng-hide="user.username">
+		Hi, Guest, <a href="#/login">login here</a>
+	</p>
 </div>

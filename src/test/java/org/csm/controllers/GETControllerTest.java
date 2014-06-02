@@ -22,12 +22,13 @@ public class GETControllerTest extends JerseyTest {
 
 	@Test
 	public void schudule() throws URISyntaxException {
-		WebResource webResource = client().resource("http://localhost:8080/csm/rest/GET/");		
+		WebResource webResource = client().resource(
+				"http://localhost:8080/csm/rest/GET/");
 		String responseMsg = null;
 		try {
-			webResource.header("Authorization", "Basic c3NhZWVkaTpzdHVkZW50MTIz");
-			responseMsg = webResource.path(
-					"schedules/cs537/summer%202014").get(String.class);
+			responseMsg = webResource.path("schedules/cs537/summer%202014")
+					.header("Authorization", "Basic c3NhZWVkaTpzdHVkZW50MTIz")
+					.get(String.class);
 		} catch (UniformInterfaceException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

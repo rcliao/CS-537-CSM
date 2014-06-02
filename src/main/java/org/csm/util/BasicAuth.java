@@ -10,7 +10,7 @@ public class BasicAuth {
      */
     public static String[] decode(String auth) {
         //Replacing "Basic THE_BASE_64" to "THE_BASE_64" directly
-        auth = auth.replaceFirst("[B|b]asic ", "");
+        auth = auth.trim().replaceFirst("[B|b]asic ", "");
  
         //Decode the Base64 into byte[]
         byte[] decodedBytes = DatatypeConverter.parseBase64Binary(auth);

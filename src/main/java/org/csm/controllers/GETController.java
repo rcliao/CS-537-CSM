@@ -25,6 +25,7 @@ import org.csm.models.dao.ScheduleDao;
 import org.csm.models.dao.UserDao;
 import org.csm.models.dao.jdbc.ScheduleDaoImpl;
 import org.csm.models.dao.jdbc.UserDaoImpl;
+import org.csm.util.BasicAuth;
 
 @Path("/GET")
 public class GETController {
@@ -69,7 +70,7 @@ public class GETController {
 	public String enroll(@PathParam("courseId") Integer scheduleId,
 			@Context HttpServletRequest request,
 			@Context HttpServletResponse response) throws SQLException {
-		User u = userDao.getUser(request.getHeader("user"));
+		User u = userDao.getUser(BasicAuth.decode(request.getHeader("Authorization"))[0]);
 		String term = "";
 		Calendar c = Calendar.getInstance();
 		int month = c.get(Calendar.MONTH);
@@ -93,7 +94,7 @@ public class GETController {
 	public String UnEnroll(@PathParam("courseId") Integer scheduleId,
 			@Context HttpServletRequest request,
 			@Context HttpServletResponse response) throws SQLException {		
-		User u = userDao.getUser(request.getHeader("user"));
+		User u = userDao.getUser(BasicAuth.decode(request.getHeader("Authorization"))[0]);
 		String term = "";
 		Calendar c = Calendar.getInstance();
 		int month = c.get(Calendar.MONTH);

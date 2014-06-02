@@ -18,7 +18,7 @@
 		</init-param>
 		<init-param>
 			<param-name>com.sun.jersey.spi.container.ContainerRequestFilters</param-name>
-			<param-value>com.sun.jersey.api.container.filter.LoggingFilter;org.csm.filters.AuthFilter</param-value>
+			<param-value>org.csm.filters.AuthFilter</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>

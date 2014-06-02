@@ -32,8 +32,8 @@ public class AuthFilter implements ContainerRequestFilter {
             return containerRequest;
         }
  
-        //Get the authentification passed in HTTP headers parameters
-        String auth = containerRequest.getHeaderValue("authorization");
+        //Get the authentication passed in HTTP headers parameters
+        String auth = containerRequest.getHeaderValue("Authorization");
  
         //If the user does not have the right (does not provide any HTTP Basic Auth)
         if(auth == null){
@@ -42,7 +42,7 @@ public class AuthFilter implements ContainerRequestFilter {
  
         //lap : loginAndPassword
         String[] lap = BasicAuth.decode(auth);
- 
+        
         //If login or password fail
         if(lap == null || lap.length != 2){
             throw new WebApplicationException(Status.UNAUTHORIZED);
@@ -65,9 +65,7 @@ public class AuthFilter implements ContainerRequestFilter {
         }
  
         //TODO : HERE YOU SHOULD ADD PARAMETER TO REQUEST, TO REMEMBER USER ON YOUR REST SERVICE...
-        InBoundHeaders headers = new InBoundHeaders();
-        headers.add("user", authenticationResult.getUsername());
-        containerRequest.setHeaders(headers);
+        
         return containerRequest;
     }
 }

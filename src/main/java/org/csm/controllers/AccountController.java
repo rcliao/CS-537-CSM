@@ -20,7 +20,7 @@ import com.google.gson.annotations.Expose;
 
 @Path("/Account")
 public class AccountController {
-
+	private UserDao userdao = new UserDaoImpl();
 	@POST
 	@Path("/login")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -28,13 +28,10 @@ public class AccountController {
 	public LoginSuccess login(User user){
 		User u = null;
 		String message = "";
-		boolean success = false;
-		UserDao userdao = new UserDaoImpl();
-		try{
-			System.out.println("user password: " + user.getPassword());
+		boolean success = false;		
+		try{			
 			// get user from user dao
 			u = userdao.getUser(user.getUsername());
-
 			if(u == null){
 				throw new WebApplicationException(
 					new Throwable("User does not exist"),

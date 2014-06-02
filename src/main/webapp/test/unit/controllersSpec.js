@@ -2,21 +2,36 @@
 
 /* jasmine specs for controllers go here */
 describe('controllers', function(){
-  var $scope;
+  var controller;
+  var scope;
 
   beforeEach(module('myApp'));
 
-  beforeEach(inject(function(_$rootScope_) {
-    $scope = _$rootScope_.$new();
-  }));
+  describe('MainCtrl', function() {
+    beforeEach(inject(function($rootScope, $controller) {
+      scope = $rootScope.$new();
+      controller = $controller('MainCtrl', {
+        '$scope': scope
+      });
+    }));
 
-  it('should have MainCtrl', inject(function($controller) {
-    var mainCtrl = $controller('MainCtrl', {
-      $scope: $scope
+    it('should have MainCtrl', function($controller) {
+      expect(controller).toBeDefined();
     });
+  });
 
-    expect(mainCtrl).toBeDefined();
-  }));
+  describe('GETCtrl', function($controller) {
+    beforeEach(inject(function($rootScope, $controller) {
+      scope = $rootScope.$new();
+      controller = $controller('GETCtrl', {
+        '$scope': scope
+      });
+    }));
+
+    it('should have terms', function() {
+      expect(scope.terms).toBeDefined();
+    });
+  });
 });
 
 describe('play_ground', function() {

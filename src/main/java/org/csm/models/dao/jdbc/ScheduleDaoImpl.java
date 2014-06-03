@@ -26,8 +26,11 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		Connection c = DriverManager.getConnection(url, myUsername, myPassword);
 		String cprefix = courseName.substring(0, 2);
 		String cnumber = courseName.substring(2);
-		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, c.subject, c.number, c.credit, c.units, s.capacity "
-				+ "from schedule s inner join courses c on s.courses_id=c.id join terms t on t.id = s.term where s.status=? and c.subject=? and c.number=? and t.description=? ";
+		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, "
+				+ "s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, "
+				+ "c.subject, c.number, c.credit, c.units, s.capacity "
+				+ "from schedule s inner join courses c on s.courses_id=c.id join terms t on "
+				+ "t.id = s.term where s.status=? and c.subject=? and c.number=? and t.description=? ";
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
 		stmt.setBoolean(1, available);
 		stmt.setString(2, cprefix.toLowerCase());
@@ -58,8 +61,11 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		Connection c = DriverManager.getConnection(url, myUsername, myPassword);
 		String cprefix = courseName.substring(0, 2);
 		String cnumber = courseName.substring(2);
-		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, c.subject, c.number, c.credit, c.units, s.capacity "
-				+ "from schedule s inner join courses c on s.courses_id=c.id join terms t on t.id = s.term where c.subject=? and c.number=? and t.description=? ";
+		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, "
+				+ "s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, "
+				+ "c.subject, c.number, c.credit, c.units, s.capacity "
+				+ "from schedule s inner join courses c on s.courses_id=c.id join terms t on "
+				+ "t.id = s.term where c.subject=? and c.number=? and t.description=? ";
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
 		stmt.setString(1, cprefix.toLowerCase());
 		stmt.setInt(2, Integer.parseInt(cnumber));
@@ -81,7 +87,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
 	}
 
 	@Override
-	public void enroll(User u,String term, Integer scheduleId) {
+	public void enroll(User u, String term, Integer scheduleId) {
 		String url = "jdbc:mysql://localhost/csm";
 		String myUsername = "csm_admin";
 		String myPassword = "csm_admin";
@@ -89,71 +95,71 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		try {
 			c = DriverManager.getConnection(url, myUsername, myPassword);
 
-		// Enrollment status: 1- 'Enrollment Authorized' 	--> ('EA')
-		//                    2-'Enrollment Unauthorized'	--> ('EU')
-		//                    3-'Course-Selected'			--> ('CS')
-		//                    4-'Course-Added'				--> ('CA')
-		//                    5-'Course-Dropped'			--> ('CD')
-		//                    6='Course-Withdrawn			--> ('CW')
-		//                    7-'Course-Passed				--> ('CP')
-		//                    8-'Course-Failed				--> ('CF')
+			// Enrollment status: 1- 'Enrollment Authorized' --> ('EA')
+			// 2-'Enrollment Unauthorized' --> ('EU')
+			// 3-'Course-Selected' --> ('CS')
+			// 4-'Course-Added' --> ('CA')
+			// 5-'Course-Dropped' --> ('CD')
+			// 6='Course-Withdrawn --> ('CW')
+			// 7-'Course-Passed --> ('CP')
+			// 8-'Course-Failed --> ('CF')
 
-		// fetching the term to get id
-		String sqlStatement = "select * from term where description = ? ;";
-		PreparedStatement stmt = c.prepareStatement(sqlStatement);
-		stmt.setString(1, term);
-		ResultSet result = stmt.executeQuery();
-		Integer id = result.getInt("id");
-		// preparing statement to insert the course into enrollement
-		sqlStatement = "insert into enrollments (term,status,users_id,schedule_id)" +
-								"values(?,?,?,?); ";
-		stmt = c.prepareStatement(sqlStatement);
-		stmt.setInt(1,id);
-		stmt.setString(2, "CA");
-		stmt.setInt(3,u.getId());
-		stmt.setInt(4,scheduleId);
-		Boolean rs = stmt.execute();
-		// update schedule table if user enrolled in course
-		sqlStatement = "update schedule set capacity=capacity-1 ," +
-						"status=case when capacity<=1 then false else true end where id=?;" ;
-		stmt=c.prepareStatement(sqlStatement);
-		stmt.setInt(1, scheduleId);
-		rs = stmt.execute();
-		c.close();
+			// fetching the term to get id
+			String sqlStatement = "select * from term where description = ? ;";
+			PreparedStatement stmt = c.prepareStatement(sqlStatement);
+			stmt.setString(1, term);
+			ResultSet result = stmt.executeQuery();
+			Integer id = result.getInt("id");
+			// preparing statement to insert the course into enrollement
+			sqlStatement = "insert into enrollments (term,status,users_id,schedule_id)"
+					+ "values(?,?,?,?); ";
+			stmt = c.prepareStatement(sqlStatement);
+			stmt.setInt(1, id);
+			stmt.setString(2, "CA");
+			stmt.setInt(3, u.getId());
+			stmt.setInt(4, scheduleId);
+			Boolean rs = stmt.execute();
+			// update schedule table if user enrolled in course
+			sqlStatement = "update schedule set capacity=capacity-1 ,"
+					+ "status=case when capacity<=1 then false else true end where id=?;";
+			stmt = c.prepareStatement(sqlStatement);
+			stmt.setInt(1, scheduleId);
+			rs = stmt.execute();
+			c.close();
 		} catch (SQLException e) {
 			System.err.println("SQL Exception");
-		    System.err.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}
 
 	}
 
 	@Override
-	public void unEnroll(User u,String term, Integer scheduleId) {
+	public void unEnroll(User u, String term, Integer scheduleId) {
 		String url = "jdbc:mysql://localhost/csm";
 		String myUsername = "csm_admin";
 		String myPassword = "csm_admin";
 		Connection c;
 		try {
 			c = DriverManager.getConnection(url, myUsername, myPassword);
-		String sqlStatement = "select * from term where description = ? ;";
-		PreparedStatement stmt = c.prepareStatement(sqlStatement);
-		stmt.setString(1, term);
-		ResultSet result = stmt.executeQuery();
-		Integer id = result.getInt("id");
-		sqlStatement = "delete from enrollment where users_id=? and schedule_id=? and term=?";
-		stmt = c.prepareStatement(sqlStatement);
-		stmt.setInt(1, u.getId());
-		stmt.setInt(2,scheduleId);
-		stmt.setInt(3, id);
-	    Boolean rs = stmt.execute();
-	    sqlStatement = "update schedule set capacity=capacity+1 ," +
-				"status=case when capacity<=0 then false else true end where id=? ;" ;
-	    stmt=c.prepareStatement(sqlStatement);
-	    stmt.setInt(1, scheduleId);
-	    rs = stmt.execute();
+			String sqlStatement = "select * from term where description = ? ;";
+			PreparedStatement stmt = c.prepareStatement(sqlStatement);
+			stmt.setString(1, term);
+			ResultSet result = stmt.executeQuery();
+			Integer id = result.getInt("id");
+			sqlStatement = "delete from enrollment where users_id=? and schedule_id=? and term=?";
+			stmt = c.prepareStatement(sqlStatement);
+			stmt.setInt(1, u.getId());
+			stmt.setInt(2, scheduleId);
+			stmt.setInt(3, id);
+			Boolean rs = stmt.execute();
+			sqlStatement = "update schedule set capacity=capacity+1 ,"
+					+ "status=case when capacity<=0 then false else true end where id=? ;";
+			stmt = c.prepareStatement(sqlStatement);
+			stmt.setInt(1, scheduleId);
+			rs = stmt.execute();
 		} catch (SQLException e) {
 			System.err.println("SQL Exception");
-		    System.err.println(e.getMessage());
+			System.err.println(e.getMessage());
 
 		}
 	}
@@ -167,8 +173,12 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		Connection c = DriverManager.getConnection(url, myUsername, myPassword);
 		String cprefix = courseName.substring(0, 2);
 		String cnumber = courseName.substring(2);
-		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, c.subject, c.number, c.credit, c.units, s.capacity "
-				+ "from schedule s inner join courses c on s.courses_id=c.id join terms t on t.id = s.term where s.status=? and c.subject=? and c.number=? and t.description=? group by c.id, s.section";
+		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, "
+				+ "s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, "
+				+ "c.subject, c.number, c.credit, c.units, s.capacity "
+				+ "from schedule s inner join courses c on s.courses_id=c.id join terms t "
+				+ "on t.id = s.term where s.status=? and c.subject=? and c.number=? and t.description=? "
+				+ "group by c.id, s.section";
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
 		stmt.setBoolean(1, available);
 		stmt.setString(2, cprefix.toLowerCase());
@@ -199,8 +209,12 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		Connection c = DriverManager.getConnection(url, myUsername, myPassword);
 		String cprefix = courseName.substring(0, 2);
 		String cnumber = courseName.substring(2);
-		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, c.subject, c.number, c.credit, c.units, s.capacity "
-				+ "from schedule s inner join courses c on s.courses_id=c.id join terms t on t.id = s.term where c.subject=? and c.number=? and t.description=? group by c.id, s.section";
+		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, "
+				+ "s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, "
+				+ "c.subject, c.number, c.credit, c.units, s.capacity "
+				+ "from schedule s inner join courses c on s.courses_id=c.id join terms t "
+				+ "on t.id = s.term where c.subject=? and c.number=? and t.description=? "
+				+ "group by c.id, s.section";
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
 		stmt.setString(1, cprefix.toLowerCase());
 		stmt.setInt(2, Integer.parseInt(cnumber));
@@ -220,9 +234,35 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		}
 		return schedules;
 	}
+
 	@Override
-	public List<Schedule> getUserSchedules(User u){
-		return null;
+	public List<Schedule> getUserSchedules(String username) throws SQLException {
+		String url = "jdbc:mysql://localhost/csm";
+		String myUsername = "csm_admin";
+		String myPassword = "csm_admin";
+		Connection c = DriverManager.getConnection(url, myUsername, myPassword);
+		String sqlStatement = "select s.id as schedule_id, s.class_number, s.section, "
+				+ "s.component, s.room, s.start_date, s.end_date, s.status, c.id as course_id, "
+				+ "c.subject, c.number, c.credit, c.units, s.capacity "
+				+ "from enrollment n join schedule s on n.schedule_id = s.id inner join courses c "
+				+ "on s.courses_id=c.id join terms t on t.id = s.term join users u on n.users_id=u.id "
+				+ "where u.username = ?";
+		PreparedStatement stmt = c.prepareStatement(sqlStatement);
+		ResultSet rs = stmt.executeQuery();
+		stmt.setString(1, username);
+		List<Schedule> schedules = new ArrayList<Schedule>();
+		while (rs.next()) {
+			schedules.add(new Schedule(rs.getInt("schedule_id"), rs
+					.getInt("class_number"), rs.getInt("section"), rs
+					.getString("component"), rs.getString("room"), rs
+					.getDate("start_date"), rs.getDate("end_date"), rs
+					.getBoolean("status"), new Course(rs.getInt("course_id"),
+					rs.getString("subject"), rs.getInt("number"), rs
+							.getBoolean("credit"), rs.getInt("units")), rs
+					.getInt("capacity")));
+
+		}
+		return schedules;
 	}
 
 }

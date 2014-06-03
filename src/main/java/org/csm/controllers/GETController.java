@@ -92,7 +92,7 @@ public class GETController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Schedule> getUserSchedules(@Context HttpServletRequest request) throws SQLException{
 		User u = userDao.getUser(BasicAuth.decode(request.getHeader("Authorization"))[0]);
-		return scheduleDao.getUserSchedules(u);
+		return scheduleDao.getUserSchedules(u.getUsername());
 	}
 	
 

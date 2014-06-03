@@ -220,5 +220,9 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		}
 		return schedules;
 	}
+	@Override
+	public List<Schedule> getUserSchedules(User u){
+		return null;
+	}
 
 }

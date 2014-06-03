@@ -18,6 +18,7 @@ public interface ScheduleDao {
 	void enroll(User u, String term, Integer scheduleId);
 	//UnEnroll User u in the schedule
 	void unEnroll(User u, String term, Integer scheduleId);
+	public List<Schedule> getUserSchedules(User u);
 
 	
 			

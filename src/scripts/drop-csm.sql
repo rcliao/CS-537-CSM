@@ -1,4 +1,5 @@
 use csm;
+drop table if exists `csm`.`parkinglots`;
 DROP TABLE IF EXISTS `csm`.`enrollement` ;
 DROP TABLE IF EXISTS `csm`.`watchlist` ;
 DROP TABLE IF EXISTS `csm`.`schedule` ;

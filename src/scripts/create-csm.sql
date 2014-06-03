@@ -26,8 +26,19 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 DROP SCHEMA IF EXISTS `csm` ;
 CREATE SCHEMA IF NOT EXISTS `csm` DEFAULT CHARACTER SET utf8 ;
 
-USE `csm` ;
+USE `csm`;
 
+--------------------------------------------------------
+-- Parking Lot
+--------------------------------------------------------
+
+create table parkinglots (
+	id int not null auto_increment,
+	latitude double,
+	longitude double,
+	availablespots int,
+	primary key(`id`))
+ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `csm`.`users`
 -- -----------------------------------------------------
@@ -249,6 +260,16 @@ CREATE  TABLE IF NOT EXISTS users (
   cin  INT NOT NULL,
   PRIMARY KEY (id) );
 
+
+-- -----------------------------------------------------
+-- Insert into parkinglots
+-- -----------------------------------------------------
+insert into parkinglots values 
+(null, 34.070175, -118.166915, 250),
+(null, 34.069295, -118.164254, 50),
+(null, 34.064958, -118.171550, 90),
+(null, 34.062985, -118.173331, 50),
+(null, 34.067153, -118.165595, 30);
 
 -- -----------------------------------------------------
 -- Insert into users

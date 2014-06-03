@@ -3,9 +3,17 @@ package org.csm.controllers;
 import static org.junit.Assert.*;
 
 import java.net.URISyntaxException;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.csm.models.Schedule;
 import org.junit.Test;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.ClientHandlerException;
 import com.sun.jersey.api.client.UniformInterfaceException;
 import com.sun.jersey.api.client.WebResource;
@@ -39,6 +47,7 @@ public class GETControllerTest extends JerseyTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(responseMsg);
+		// System.out.println(responseMsg);			
+		System.out.println(responseMsg);		
 	}
 }

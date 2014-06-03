@@ -87,6 +87,14 @@ public class GETController {
 		response.setStatus(201);
 		return null;
 	}
+	@GET
+	@Path("/userSchedules")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<Schedule> getUserSchedules(@Context HttpServletRequest request) throws SQLException{
+		User u = userDao.getUser(BasicAuth.decode(request.getHeader("Authorization"))[0]);
+		return scheduleDao.getUserSchedules(u);
+	}
+	
 
 	@DELETE
 	@Path("/enroll/{scheduleId}")
@@ -111,4 +119,5 @@ public class GETController {
 		response.setStatus(201);
 		return null;
 	}
+	
 }

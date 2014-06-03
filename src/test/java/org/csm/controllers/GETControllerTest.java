@@ -47,7 +47,12 @@ public class GETControllerTest extends JerseyTest {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		// System.out.println(responseMsg);			
-		System.out.println(responseMsg);		
+		// System.out.println(responseMsg);		
+		Gson gson = new GsonBuilder().setDateFormat("MMM dd, yyyy").create();
+		java.lang.reflect.Type type = new TypeToken<List<Schedule>>(){}.getType();
+		List<Schedule> sc = gson.fromJson(responseMsg, type);
+		assert sc.size() == 1;
+		assert sc.get(0).getId() == 2;
+				
 	}
 }

@@ -21,6 +21,8 @@ import org.csm.models.Schedule;
 import org.csm.models.User;
 import org.csm.models.dao.ScheduleDao;
 import org.csm.models.dao.jdbc.ScheduleDaoImpl;
+import org.csm.models.dao.EnrollmentDao;
+import org.csm.models.dao.jdbc.EnrollmentDaoImpl;
 
 @Path("/GET")
 public class GETController {
@@ -104,8 +106,8 @@ public class GETController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String enroll(@PathParam("courseId") Integer scheduleId,
 			@Context HttpServletRequest request,
-			@Context HttpServletResponse response) {
-		ScheduleDao scheduleDao = new ScheduleDaoImpl();
+			@Context HttpServletResponse response) throws SQLException {
+		EnrollmentDao enrollmentDao = new EnrollmentDaoImpl();
 		HttpSession session = request.getSession(true);
 		User u = (User) session.getAttribute("loginUser");
 		if (u == null) {
@@ -124,7 +126,7 @@ public class GETController {
 			else
 				term = "fall ";
 			term += c.get(Calendar.YEAR);
-			scheduleDao.enroll(u, term, scheduleId);
+			enrollmentDao.enroll(u, term, scheduleId);
 		}
 		response.setStatus(201);
 		return null;
@@ -135,8 +137,8 @@ public class GETController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String UnEnroll(@PathParam("courseId") Integer scheduleId,
 			@Context HttpServletRequest request,
-			@Context HttpServletResponse response) {
-		ScheduleDao scheduleDao = new ScheduleDaoImpl();
+			@Context HttpServletResponse response) throws SQLException {
+		EnrollmentDao enrollmentDao = new EnrollmentDaoImpl();
 		HttpSession session = request.getSession(true);
 		User u = (User) session.getAttribute("loginUser");
 		if (u == null) {
@@ -155,7 +157,7 @@ public class GETController {
 			else
 				term = "fall ";
 			term += c.get(Calendar.YEAR);
-			scheduleDao.unEnroll(u, term, scheduleId);
+			 enrollmentDao.unEnroll(u, term, scheduleId);
 		}
 		response.setStatus(201);
 		return null;

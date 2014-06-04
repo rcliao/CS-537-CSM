@@ -142,38 +142,38 @@ CREATE INDEX `fk_schedule_departments1_idx` ON `csm`.`schedule` (`department_id`
 
 
 -- -----------------------------------------------------
--- Table `csm`.`enrollement`
+-- Table `csm`.`enrollment`
 -- -----------------------------------------------------
 
-CREATE TABLE IF NOT EXISTS `csm`.`enrollement` (
+CREATE TABLE IF NOT EXISTS `csm`.`enrollment` (
   `id` INT NOT NULL auto_increment,
   `term` INT NOT NULL,
   `status` VARCHAR(45) NULL,
   `schedule_id` INT NOT NULL,
   `users_id` INT NOT NULL,
   PRIMARY KEY (`id`, `users_id`, `term`),
-  CONSTRAINT `fk_enrollement_schedule1`
+  CONSTRAINT `fk_enrollment_schedule1`
     FOREIGN KEY (`schedule_id`)
     REFERENCES `csm`.`schedule` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_enrollement_users1`
+  CONSTRAINT `fk_enrollment_users1`
     FOREIGN KEY (`users_id`)
     REFERENCES `csm`.`users` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_enrollement_terms1`
+  CONSTRAINT `fk_enrollment_terms1`
     FOREIGN KEY (`term`)
     REFERENCES `csm`.`terms` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_enrollement_schedule1_idx` ON `csm`.`enrollement` (`schedule_id` ASC);
+CREATE INDEX `fk_enrollment_schedule1_idx` ON `csm`.`enrollment` (`schedule_id` ASC);
 
-CREATE INDEX `fk_enrollement_users1_idx` ON `csm`.`enrollement` (`users_id` ASC);
+CREATE INDEX `fk_enrollment_users1_idx` ON `csm`.`enrollment` (`users_id` ASC);
 
-CREATE INDEX `fk_enrollement_terms1_idx` ON `csm`.`enrollement` (`term` ASC);
+CREATE INDEX `fk_enrollment_terms1_idx` ON `csm`.`enrollment` (`term` ASC);
 
 
 -- -----------------------------------------------------
@@ -216,7 +216,7 @@ CREATE TABLE IF NOT EXISTS `csm`.`watchlist` (
   `schedule_department_id` INT NOT NULL,
   `schedule_term` INT NOT NULL,
   PRIMARY KEY (`id`, `users_id`, `term`),
-  CONSTRAINT `fk_enrollement_users10`
+  CONSTRAINT `fk_enrollment_users10`
     FOREIGN KEY (`users_id`)
     REFERENCES `csm`.`users` (`id`)
     ON DELETE NO ACTION
@@ -233,7 +233,7 @@ CREATE TABLE IF NOT EXISTS `csm`.`watchlist` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_enrollement_users1_idx` ON `csm`.`watchlist` (`users_id` ASC);
+CREATE INDEX `fk_enrollment_users1_idx` ON `csm`.`watchlist` (`users_id` ASC);
 
 CREATE INDEX `fk_watchlist_terms1_idx` ON `csm`.`watchlist` (`term` ASC);
 
@@ -255,7 +255,7 @@ CREATE  TABLE IF NOT EXISTS users (
 -- -----------------------------------------------------
 
 insert into users (username,password,first_name,last_name,email,cin)
-        values('gpetros','student123','Gayaneh','Petrossian','gpetros@calstatla.edu',999666333);
+        values('gpetros','student123','Gayaneh','Petrossian','gpetros@calstatela.edu',999666333);
 insert into users (username,password,first_name,last_name,email,cin)
        values ('ebayazian','student123','Elnaz','Bayazian','ebayazian@calsutatela.edu',123456789);
 insert into users (username,password,first_name,last_name,email,cin)
@@ -319,3 +319,15 @@ insert into faculty (`title`,`first_name` ,`last_name`, `office_room_number` ,`o
 insert into faculty (`title`,`first_name` ,`last_name`, `office_room_number` ,`office_phone`,
 					`email` ,  `web_url` ,  `departments_id` )
 			values ('Dr.','Chengyu','Sun',' E&T A-317',' (323) 343-6697','csun@calstatela.edu','e: http://sun.calstatela.edu/~cysun/www/index.html',1);
+			
+-- -----------------------------------------------------
+-- Insert into Faculty
+-- -----------------------------------------------------
+start transaction;
+insert into enrollment
+(term,status,users_id,schedule_id)
+values(1,'CA',1,1);
+
+update schedule set capacity=capacity-1 ,
+					status= (case when capacity<=1 then false else true end )  where id=1;
+commit;

@@ -135,7 +135,7 @@ public class EnrollmentDaoImpl implements EnrollmentDao{
 	}
 
 	@Override
-	public List<Schedule> getUserSchedule(User u, String term) throws SQLException {
+	public List<Schedule> getUserSchedule(String username, String term) throws SQLException {
 		String url = "jdbc:mysql://localhost/csm";
 		String myUsername = "csm_admin";
 		String myPassword = "csm_admin";
@@ -149,10 +149,11 @@ public class EnrollmentDaoImpl implements EnrollmentDao{
 							" from enrollment e inner join terms t on (e.term=t.id )" +
 							" inner join schedule s on (e.schedule_id=s.id  ) " +
 							"inner join courses c on s.courses_id=c.id " +
-							" where t.description=? and  users_id=? ";
+							"inner join users u on (u.id=e.users_id)"+
+							" where t.description=? and  u.username=? ";
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
 		stmt.setString(1, term);
-		stmt.setInt(2,u.getId());
+		stmt.setString(2,username);
 		ResultSet rs = stmt.executeQuery();
 		List<Schedule> schedules = new ArrayList<Schedule>();
 		while (rs.next()) {

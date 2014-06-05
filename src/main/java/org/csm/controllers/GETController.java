@@ -21,8 +21,10 @@ import javax.ws.rs.core.Response.Status;
 
 import org.csm.models.Schedule;
 import org.csm.models.User;
+import org.csm.models.dao.EnrollmentDao;
 import org.csm.models.dao.ScheduleDao;
 import org.csm.models.dao.UserDao;
+import org.csm.models.dao.jdbc.EnrollmentDaoImpl;
 import org.csm.models.dao.jdbc.ScheduleDaoImpl;
 import org.csm.models.dao.jdbc.UserDaoImpl;
 import org.csm.util.BasicAuth;
@@ -31,6 +33,7 @@ import org.csm.util.BasicAuth;
 public class GETController {
 	private UserDao userDao = new UserDaoImpl();
 	private ScheduleDao scheduleDao = new ScheduleDaoImpl();
+	private EnrollmentDao enrollmentDao = new EnrollmentDaoImpl();
 
 	@GET
 	@Path("/schedules/{courseName}/{term}")
@@ -83,7 +86,7 @@ public class GETController {
 		else
 			term = "fall ";
 		term += c.get(Calendar.YEAR);
-		scheduleDao.enroll(u, term, scheduleId);
+		enrollmentDao.enroll(u, term, scheduleId);
 		response.setStatus(201);
 		return null;
 	}
@@ -92,7 +95,19 @@ public class GETController {
 	@Produces(MediaType.APPLICATION_JSON)
 	public List<Schedule> getUserSchedules(@Context HttpServletRequest request) throws SQLException{
 		User u = userDao.getUser(BasicAuth.decode(request.getHeader("Authorization"))[0]);
-		return scheduleDao.getUserSchedules(u.getUsername());
+		String term = "";
+		Calendar c = Calendar.getInstance();
+		int month = c.get(Calendar.MONTH);
+		if (month < 3)
+			term = "winter ";
+		else if (month < 6)
+			term = "spring ";
+		else if (month < 9)
+			term = "summer ";
+		else
+			term = "fall ";
+		term += c.get(Calendar.YEAR);
+		return enrollmentDao.getUserSchedule(u.getUsername(),term);
 	}
 	
 
@@ -115,7 +130,7 @@ public class GETController {
 		else
 			term = "fall ";
 		term += c.get(Calendar.YEAR);
-		scheduleDao.unEnroll(u, term, scheduleId);
+		enrollmentDao.unEnroll(u, term, scheduleId);
 		response.setStatus(201);
 		return null;
 	}

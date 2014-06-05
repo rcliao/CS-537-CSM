@@ -13,7 +13,9 @@ public interface EnrollmentDao {
 	//UnEnroll User u in the schedule
 		void unEnroll(User u, String term, Integer scheduleId) throws SQLException;
 	// get user schedule
-		public  List<Schedule> getUserSchedule(User u, String term) throws SQLException;
+	//	public  List<Schedule> getUserSchedule(User u, String term) throws SQLException;
    // get enrollment
 		public Enrollment getEnrollment(User u,String term,Integer scheduleId) throws SQLException;
+		List<Schedule> getUserSchedule(String username, String term)
+				throws SQLException;
 }

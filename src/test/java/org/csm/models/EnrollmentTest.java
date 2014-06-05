@@ -39,11 +39,11 @@ public void TestUserSchedule()throws SQLException{
 		}  
 	    EnrollmentDao edao = new EnrollmentDaoImpl();
 	    User user = new User(2,"Elnaz","Bayazian","ebayazian","student123","ebayasian@calstatela.edu",123456789);
-	    Assert.assertEquals(edao.getUserSchedule(user,"summer 2014").size(), 0);
+	    Assert.assertEquals(edao.getUserSchedule("ebayazian","summer 2014").size(), 0);
 	    edao.enroll(user, "summer 2014" ,3);
-	    Assert.assertEquals(edao.getUserSchedule(user,"summer 2014").size(), 1);
+	    Assert.assertEquals(edao.getUserSchedule("ebayazian","summer 2014").size(), 1);
 	    edao.unEnroll(user,"summer 2014" ,3);
-	    Assert.assertEquals(edao.getUserSchedule(user,"summer 2014").size(), 0);
+	    Assert.assertEquals(edao.getUserSchedule("ebayazian","summer 2014").size(), 0);
 	    
 }
 }

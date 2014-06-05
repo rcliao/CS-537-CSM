@@ -28,9 +28,9 @@ CREATE SCHEMA IF NOT EXISTS `csm` DEFAULT CHARACTER SET utf8 ;
 
 USE `csm`;
 
---------------------------------------------------------
+-- ------------------------------------------------------
 -- Parking Lot
---------------------------------------------------------
+-- ------------------------------------------------------
 
 create table parkinglots (
 	id int not null auto_increment,
@@ -264,7 +264,7 @@ CREATE  TABLE IF NOT EXISTS users (
 -- -----------------------------------------------------
 -- Insert into parkinglots
 -- -----------------------------------------------------
-insert into parkinglots values 
+insert into parkinglots values
 (null, 34.070175, -118.166915, 250),
 (null, 34.069295, -118.164254, 50),
 (null, 34.064958, -118.171550, 90),
@@ -340,7 +340,7 @@ insert into faculty (`title`,`first_name` ,`last_name`, `office_room_number` ,`o
 insert into faculty (`title`,`first_name` ,`last_name`, `office_room_number` ,`office_phone`,
 					`email` ,  `web_url` ,  `departments_id` )
 			values ('Dr.','Chengyu','Sun',' E&T A-317',' (323) 343-6697','csun@calstatela.edu','e: http://sun.calstatela.edu/~cysun/www/index.html',1);
-			
+
 -- -----------------------------------------------------
 -- Insert into Faculty
 -- -----------------------------------------------------

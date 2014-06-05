@@ -148,3 +148,8 @@ a {
 .ui.list .description {
 	color: #f3f781;
 }
+
+.angular-google-map-container {
+	height: 400px;
+	color: #000;
+}

@@ -70,13 +70,13 @@ public class GETController {
 	@POST
 	@Path("/enroll/{scheduleId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String enroll(@PathParam("courseId") Integer scheduleId,
+	public String enroll(@PathParam("scheduleId") Integer scheduleId,
 			@Context HttpServletRequest request,
 			@Context HttpServletResponse response) throws SQLException {
 		User u = userDao.getUser(BasicAuth.decode(request.getHeader("Authorization"))[0]);
 		String term = "";
 		Calendar c = Calendar.getInstance();
-		int month = c.get(Calendar.MONTH);
+		int month = c.get(Calendar.MONTH)+3;
 		if (month < 3)
 			term = "winter ";
 		else if (month < 6)
@@ -86,10 +86,12 @@ public class GETController {
 		else
 			term = "fall ";
 		term += c.get(Calendar.YEAR);
+		System.out.println(scheduleId);
 		enrollmentDao.enroll(u, term, scheduleId);
 		response.setStatus(201);
 		return null;
 	}
+
 	@GET
 	@Path("/userSchedules")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -97,7 +99,7 @@ public class GETController {
 		User u = userDao.getUser(BasicAuth.decode(request.getHeader("Authorization"))[0]);
 		String term = "";
 		Calendar c = Calendar.getInstance();
-		int month = c.get(Calendar.MONTH);
+		int month = c.get(Calendar.MONTH)+3;
 		if (month < 3)
 			term = "winter ";
 		else if (month < 6)
@@ -109,18 +111,18 @@ public class GETController {
 		term += c.get(Calendar.YEAR);
 		return enrollmentDao.getUserSchedule(u.getUsername(),term);
 	}
-	
+
 
 	@DELETE
 	@Path("/enroll/{scheduleId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String UnEnroll(@PathParam("courseId") Integer scheduleId,
+	public String UnEnroll(@PathParam("scheduleId") Integer scheduleId,
 			@Context HttpServletRequest request,
-			@Context HttpServletResponse response) throws SQLException {		
+			@Context HttpServletResponse response) throws SQLException {
 		User u = userDao.getUser(BasicAuth.decode(request.getHeader("Authorization"))[0]);
 		String term = "";
 		Calendar c = Calendar.getInstance();
-		int month = c.get(Calendar.MONTH);
+		int month = c.get(Calendar.MONTH)+3;
 		if (month < 3)
 			term = "winter ";
 		else if (month < 6)
@@ -134,5 +136,5 @@ public class GETController {
 		response.setStatus(201);
 		return null;
 	}
-	
+
 }

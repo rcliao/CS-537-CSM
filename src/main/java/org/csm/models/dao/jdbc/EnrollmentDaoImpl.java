@@ -38,39 +38,42 @@ public class EnrollmentDaoImpl implements EnrollmentDao{
 		//                    8-'Course-Failed				--> ('CF')
 
 		// fetching the term to get id
-			
+
 		Enrollment enrollment = getEnrollment( u,  term, scheduleId);
 		if (enrollment == null)
 		{
-		String sqlStatement = "select * from terms where description = ? ;";
-		PreparedStatement stmt = c.prepareStatement(sqlStatement);
-		stmt.setString(1, term);
-		result = stmt.executeQuery();
-		if( result.next())
-		{
-		Integer id = result.getInt("id");
-	
-		// preparing statement to insert the course into enrollment
-		sqlStatement = "insert into enrollment (term,status,users_id,schedule_id)" +
-								"values(?,?,?,?); ";
-		stmt = c.prepareStatement(sqlStatement);
-		stmt.setInt(1,id);
-		stmt.setString(2, "CA");
-		stmt.setInt(3,u.getId());
-		stmt.setInt(4,scheduleId);
-		Boolean rs = stmt.execute();
-		// update schedule table if user enrolled in course
-		sqlStatement = "update schedule set capacity=capacity-1 ," +
-						"status=case when capacity<=1 then false else true end where id=?;" ;
-		stmt=c.prepareStatement(sqlStatement);
-		stmt.setInt(1, scheduleId);
-		rs = stmt.execute();
-		//sqlStatement="SELECT LAST_INSERT_ID();";
-		//stmt=c.prepareStatement(sqlStatement);
-		//result=stmt.executeQuery();
-		//enrollment_id= result.getInt("last_insert_id()");
-		c.commit();
-		}
+			System.out.println(term);
+			String sqlStatement = "select * from terms where description = ?";
+			PreparedStatement stmt = c.prepareStatement(sqlStatement);
+			stmt.setString(1, term);
+			result = stmt.executeQuery();
+			if( result.next())
+			{
+				Integer id = result.getInt("id");
+
+				// preparing statement to insert the course into enrollment
+				sqlStatement = "insert into enrollment (term,status,users_id,schedule_id)" +
+										"values(?,?,?,?); ";
+
+				stmt = c.prepareStatement(sqlStatement);
+				stmt.setInt(1,id);
+				stmt.setString(2, "CA");
+				stmt.setInt(3,u.getId());
+				stmt.setInt(4,scheduleId);
+
+				Boolean rs = stmt.execute();
+				// update schedule table if user enrolled in course
+				sqlStatement = "update schedule set capacity=capacity-1 ," +
+								"status=case when capacity<=1 then false else true end where id=?;" ;
+				stmt=c.prepareStatement(sqlStatement);
+				stmt.setInt(1, scheduleId);
+				rs = stmt.execute();
+				//sqlStatement="SELECT LAST_INSERT_ID();";
+				//stmt=c.prepareStatement(sqlStatement);
+				//result=stmt.executeQuery();
+				//enrollment_id= result.getInt("last_insert_id()");
+				c.commit();
+			}
 		}
 		else
 			System.err.println("You have already enrolled in this class!");
@@ -82,7 +85,7 @@ public class EnrollmentDaoImpl implements EnrollmentDao{
 		finally{
 			c.close();
 		}
-		
+
 
 	}
 
@@ -103,12 +106,12 @@ public class EnrollmentDaoImpl implements EnrollmentDao{
 		stmt.setString(3, term);
 		/*
 		 * The execute method returns a boolean to indicate the form of the first result.
-		 *  You must call either the method getResultSet or getUpdateCount to retrieve the result; 
+		 *  You must call either the method getResultSet or getUpdateCount to retrieve the result;
 		 *  you must call getMoreResults to move to any subsequent result(s).
 
 		Returns:
 			true if the first result is a ResultSet object; false if the first result is an update count
-			 or there is no result 
+			 or there is no result
 
 		 */
 	    Boolean rs = stmt.execute();
@@ -123,7 +126,7 @@ public class EnrollmentDaoImpl implements EnrollmentDao{
 	    }
 	    else
 	    	c.rollback();
-	  
+
 		} catch (SQLException e) {
 			System.err.println("SQL Exception");
 		    System.err.println(e.getMessage());
@@ -186,7 +189,7 @@ public class EnrollmentDaoImpl implements EnrollmentDao{
 				            " inner join schedule s on (e.schedule_id=s.id  ) " +
 				            "inner join courses c on s.courses_id=c.id " +
 				            " where t.description=? and  users_id=? and e.schedule_id=?";
-		
+
 		PreparedStatement stmt = c.prepareStatement(sqlStatement);
 		stmt.setString(1, term);
 		stmt.setInt(2,u.getId());
@@ -208,6 +211,6 @@ public class EnrollmentDaoImpl implements EnrollmentDao{
 
 			}
 	  return enrollment;
-	} 
+	}
 
 }

@@ -49,6 +49,8 @@ public class EmailController {
 					}
 				});
 		try {
+			System.out.println("to:" + to);
+
 			Message message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(u.getEmail()));
 			message.setRecipients(Message.RecipientType.TO,
@@ -62,7 +64,7 @@ public class EmailController {
 
 		} catch (MessagingException e) {
 			System.out.println("Not Done!");
-			throw new RuntimeException(e);			
+			throw new RuntimeException(e);
 		}
 	}
 }

@@ -4,8 +4,14 @@
 
 	/* Controllers */
 	angular.module('myApp.controllers', [])
-		.controller('MainCtrl', ['$scope', '$rootScope', 'Auth',
-			function($scope, $rootScope, Auth) {
+		.controller('MainCtrl', ['$scope', '$rootScope', 'Auth', '$http',
+			function($scope, $rootScope, Auth, $http) {
+				// Http header for the authorization
+				$http.defaults.headers.common.Authorization =
+					'Basic ' + btoa(
+						$scope.user.username + ':' + $scope.user.password
+					);
+
 			  	$scope.init = function() {
 					$('.ui.sidebar')
 						.sidebar()
@@ -62,6 +68,7 @@
 						function() {
 							$scope.loading = false;
 							$location.path('/home');
+							$route.reload();
 						},
 						function(err) {
 							$scope.loading = false;
@@ -106,7 +113,8 @@
 					Resources.getSchedules(
 						{
 							'name': $scope.query,
-							'term': $scope.term
+							'term': $scope.term,
+							'available': $scope.available
 						},
 						function(data) {
 							$scope.courses = data;
@@ -124,12 +132,42 @@
 						}
 					);
 				};
+
+				$scope.enrollCourse = function(courseId) {
+					Resources.enrollCourse(
+						{
+							'name': courseId
+						},
+						{},
+						function(data) {
+							$scope.courses = data;
+						},
+						function(err) {
+							$scope.errorMsg = err;
+						}
+					);
+				};
+
+				$scope.dropCourse = function(courseId) {
+					Resources.dropCourse(
+						{
+							'name': courseId
+						},
+						{},
+						function(data) {
+							$scope.courses = data;
+						},
+						function(err) {
+							$scope.errorMsg = err;
+						}
+					);
+				};
 			}
 		])
 		.controller('EmailCtrl', ['$scope', 'Resources',
-			function($scope) {
+			function($scope, Resources) {
+				var advancedEditor;
 				$scope.init = function() {
-					var advancedEditor;
 
 					advancedEditor = new Quill('.advanced-wrapper .editor-container', {
 						modules: {
@@ -158,6 +196,61 @@
 					}
 					sourceDelta = advancedEditor.getContents();
 					});
+				};
+
+				$scope.sendEmail = function() {
+					Resources.sendEmail(
+						{
+							'to': $scope.to,
+							'text': advancedEditor.getText(),
+							'subject': $scope.subject
+						},
+						{},
+						function() {
+
+						},
+						function() {
+
+						}
+					)
+				};
+			}
+		])
+		.controller('ScheduleCtrl', ['$scope', 'Resources',
+			function($scope, Resources) {
+				$scope.init = function() {
+					Resources.getCourseEvents(
+						{},
+						function(data) {
+							console.log(data);
+							$scope.events = data;
+						}, function(err) {
+							console.log(err);
+						}
+					);
+				};
+			}
+		])
+		.controller('ParkingCtrl', ['$scope', 'Resources',
+			function($scope, Resources) {
+				$scope.init = function() {
+					Resources.getParkingLots(
+						{},
+						function(data) {
+							console.log(data);
+							$scope.parkingLots = data;
+						}, function(err) {
+							console.log(err);
+						}
+					);
+					// 34.068516, -118.168822
+					$scope.map = {
+						center: {
+							latitude: 34.068516,
+							longitude: -118.168822
+						},
+						zoom: 16
+					};
 				};
 			}
 		]);

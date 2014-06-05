@@ -21,32 +21,31 @@ angular.module('myApp.services', []).
       getSchedules:
       {
         method: 'GET',
-        params: {table: 'GET', operation: 'schedules' }
+        params: { table: 'GET', operation: 'schedules' },
+        isArray: true
       },
       dropCourse:
       {
         method: 'DELETE',
-        params: {table: 'courses'}
+        params: { table: 'GET', operation:'enroll' }
       },
       enrollCourse: {
         method: 'POST',
-        params: {table: 'courses'}
+        params: { table: 'GET', operation:'enroll' }
       },
-      swapCourses: {
-        method: 'POST',
-        params: {table: 'swap'}
-      },
-      getWatchList: {
+      getCourseEvents: {
         method: 'GET',
-        params: {table: 'watchList'}
+        params: { table: 'GET', operation: 'userSchedules' },
+        isArray: true
       },
-      addToWatchList: {
+      getParkingLots: {
+        method: 'GET',
+        params: { table: 'ParkingLot', operation: 'getAvailableSpots' },
+        isArray: true
+      },
+      sendEmail: {
         method: 'POST',
-        params: {table: 'watchList'}
-      },
-      deleteFromWatchList: {
-        method: 'DELETE',
-        params: {table: 'watchList'}
+        params: { table: 'Email', operation: 'sendEmail' }
       }
   	});
   })

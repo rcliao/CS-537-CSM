@@ -9,6 +9,7 @@ angular.module('myApp', [
 	'ngResource',
 	'ngCookies',
 	'ui.bootstrap',
+	'google-maps',
 	'myApp.filters',
 	'myApp.services',
 	'myApp.directives',
@@ -45,6 +46,7 @@ config(['$routeProvider', function($routeProvider) {
 		'/parking',
 		{
 			templateUrl: 'partials/parking.html',
+			controller: 'ParkingCtrl',
 			access: access.student
 		}
 	);
@@ -52,6 +54,7 @@ config(['$routeProvider', function($routeProvider) {
 		'/schedule',
 		{
 			templateUrl: 'partials/schedule.html',
+			controller: 'ScheduleCtrl',
 			access: access.student
 		}
 	);

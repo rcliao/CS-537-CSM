@@ -1,1 +1,9 @@
-parking page here
+<div ng-init="init()">
+	<google-map center="map.center" zoom="map.zoom" draggable="true">
+		<markers models="parkingLots" coords="'self'" click="'onClicked'">
+			<windows show="'showWindow'" closeClick="'closeClick'">
+				<p ng-non-bindable>Available spots: {{availableSpots}}</p>
+			</windows>
+		</markers>
+	</google-map>
+</div>

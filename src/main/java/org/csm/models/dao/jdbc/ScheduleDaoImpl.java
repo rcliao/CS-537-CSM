@@ -86,6 +86,6 @@ public class ScheduleDaoImpl implements ScheduleDao {
 		return schedules;
 	}
 
-	
+
 
 }

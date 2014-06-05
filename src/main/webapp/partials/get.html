@@ -22,20 +22,11 @@
 		<h3 class="ui header">Search Result</h3>
 
 		<div class="ui divided list">
-			<div class="item">
+			<div class="item" ng-repeat="c in courses">
 				<div class="ui green circular label right-floating"></div>
 				<i class="book csula-color icon"></i>
 				<div class="content">
-					<a class="header">CS 512 - 1</a>
-					<div class="description">T,Th 1:30-3:00</div>
-				</div>
-			</div>
-			<div class="item">
-				<div class="ui red circular label right-floating"></div>
-				<i class="book csula-color icon"></i>
-				<div class="content">
-					<a class="header">CS 540 - 1</a>
-					<div class="description">T,Th 1:30-3:00</div>
+					<a class="header">{{c.course.subject}} {{c.course.number}}</a>
 				</div>
 			</div>
 		</div>
@@ -57,25 +48,24 @@
 			<tab heading="Add">
 				<!-- Search boxes -->
 				<div class="ui small fluid action input">
-					<input type="text" placeholder="Search Classes">
-					<div class="ui button">
-						<i class="search icon"></i>
+					<input type="text" ng-model="$parent.$parent.query" placeholder="Search Classes">
+					<div class="ui blue button" ng-click="searchCourses()">
+						<i class="{{ searchStatus }} big icon"></i>
 					</div>
 				</div>
 
 				<!-- racing condition so we have to call init twice -->
 				<div class="ui fluid quarter selection dropdown" ng-init="init()">
-					<div class="text">Summer 2014</div>
+					<div class="text">{{ term }}</div>
 					<i class="dropdown icon"></i>
 					<div class="menu">
-						<div class="item">Summer 2014</div>
-						<div class="item">Fall 2014</div>
-						<div class="item">Spring 2015</div>
+						<div class="item" ng-repeat="t in terms" ng-click="changeTerm(t)">{{ t }}</div>
 					</div>
 				</div>
 
+
 				<div class="ui slider checkbox">
-					<input id="available" type="checkbox">
+					<input id="available" type="checkbox" ng-model="$parent.$parent.available">
 					<label for="available">Available?</label>
 				</div>
 
@@ -84,17 +74,46 @@
 				<h3 class="ui header">Search Result</h3>
 
 				<div class="ui list">
-					<a class="item">
+					<a class="item" ng-repeat="c in courses" ng-click="enrollCourse(c.id)">
 						<i class="book csula-color icon"></i>
-						CS 512
-					</a>
-					<a class="item">
-						<i class="book csula-color icon"></i>
-						CS 540
+						{{c.course.subject}} {{c.course.number}}
 					</a>
 				</div>
 			</tab>
 			<tab heading="Drop">
+				<!-- Search boxes -->
+				<div class="ui small fluid action input">
+					<input type="text" ng-model="$parent.$parent.query" placeholder="Search Classes">
+					<div class="ui blue button" ng-click="searchCourses()">
+						<i class="{{ searchStatus }} big icon"></i>
+					</div>
+				</div>
+
+				<!-- racing condition so we have to call init twice -->
+				<div class="ui fluid quarter selection dropdown" ng-init="init()">
+					<div class="text">{{ term }}</div>
+					<i class="dropdown icon"></i>
+					<div class="menu">
+						<div class="item" ng-repeat="t in terms" ng-click="changeTerm(t)">{{ t }}</div>
+					</div>
+				</div>
+
+
+				<div class="ui slider checkbox">
+					<input id="available" type="checkbox" ng-model="$parent.$parent.available">
+					<label for="available">Available?</label>
+				</div>
+
+				<div class="ui divider"></div>
+
+				<h3 class="ui header">Search Result</h3>
+
+				<div class="ui list">
+					<a class="item" ng-repeat="c in courses" ng-click="dropCourse(c.id)">
+						<i class="book csula-color icon"></i>
+						{{c.course.subject}} {{c.course.number}}
+					</a>
+				</div>
 			</tab>
 			<tab heading="Swap">
 			</tab>
@@ -102,6 +121,6 @@
 
 	</tab>
 	<tab heading="Academic" disabled="true">
-		
+
 	</tab>
 </tabset>

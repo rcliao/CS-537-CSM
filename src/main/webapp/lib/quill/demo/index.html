@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Quill Editor Demo</title>
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <div id="content-container">
+      <div id="editor-wrapper">
+        <div id="formatting-container">
+          <select title="Font" class="sc-font">
+            <option value="sans-serif" selected>Sans Serif</option>
+            <option value="Georgia, serif">Serif</option>
+            <option value="Monaco, &quot;Courier New&quot;, monospace">Monospace</option>
+          </select>
+          <select title="Size" class="sc-size">
+            <option value="10px">Small</option>
+            <option value="13px" selected>Normal</option>
+            <option value="18px">Large</option>
+            <option value="32px">Huge</option>
+          </select>
+          <select title="Text Color" class="sc-color">
+            <option value="rgb(255, 255, 255)">White</option>
+            <option value="rgb(0, 0, 0)" selected>Black</option>
+            <option value="rgb(255, 0, 0)">Red</option>
+            <option value="rgb(0, 0, 255)">Blue</option>
+            <option value="rgb(0, 255, 0)">Lime</option>
+            <option value="rgb(0, 128, 128)">Teal</option>
+            <option value="rgb(255, 0, 255)">Magenta</option>
+            <option value="rgb(255, 255, 0)">Yellow</option>
+          </select>
+          <select title="Background Color" class="sc-background">
+            <option value="rgb(255, 255, 255)" selected>White</option>
+            <option value="rgb(0, 0, 0)">Black</option>
+            <option value="rgb(255, 0, 0)">Red</option>
+            <option value="rgb(0, 0, 255)">Blue</option>
+            <option value="rgb(0, 255, 0)">Lime</option>
+            <option value="rgb(0, 128, 128)">Teal</option>
+            <option value="rgb(255, 0, 255)">Magenta</option>
+            <option value="rgb(255, 255, 0)">Yellow</option>
+          </select>
+          <select title="Text Alignment" class="sc-align">
+            <option value="left" selected>Left</option>
+            <option value="center">Center</option>
+            <option value="right">Right</option>
+            <option value="justify">Justify</option>
+          </select>
+          <button title="Bold" class="sc-format-button sc-bold">Bold</button>
+          <button title="Italic" class="sc-format-button sc-italic">Italic</button>
+          <button title="Underline" class="sc-format-button sc-underline">Under</button>
+          <button title="Strikethrough" class="sc-format-button sc-strike">Strike</button>
+          <button title="Link" class="sc-format-button sc-link">Link</button>
+          <button title="Image" class="sc-format-button sc-image">Image</button>
+          <button title="Bullet" class="sc-format-button sc-bullet">Bullet</button>
+          <button title="List" class="sc-format-button sc-list">List</button>
+        </div>
+        <div id="editor-container"></div>
+      </div>
+    </div>
+    <script type="text/javascript" src="../quill.js"></script>
+    <script type="text/javascript">
+      var editor = new Quill('#editor-container', {
+        modules: {
+          'toolbar': { container: '#formatting-container' },
+          'image-tooltip': true,
+          'link-tooltip': true
+        }
+      });
+      editor.on('selection-change', function(range) {
+        console.log('selection-change', range)
+      });
+      editor.on('text-change', function(delta, source) {
+        console.log('text-change', delta, source)
+      });
+    </script>
+  </body>
+</html>

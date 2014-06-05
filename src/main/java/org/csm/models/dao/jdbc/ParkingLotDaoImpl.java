@@ -18,7 +18,7 @@ public class ParkingLotDaoImpl implements ParkingLotDao {
 		String myUsername = "csm_admin";
 		String myPassword = "csm_admin";
 		Connection c = DriverManager.getConnection(url, myUsername, myPassword);
-		PreparedStatement st = c.prepareStatement("select * from parkinglot");
+		PreparedStatement st = c.prepareStatement("select * from parkinglots");
 		ResultSet rs = st.executeQuery();
 		List<ParkingLot> parkinglots = new ArrayList<ParkingLot>();
 		while (rs.next()) {

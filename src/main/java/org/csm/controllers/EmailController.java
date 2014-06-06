@@ -51,12 +51,12 @@ public class EmailController {
 		try {
 			System.out.println("to:" + to);
 
-			Message message = new MimeMessage(session);
+			MimeMessage message = new MimeMessage(session);
 			message.setFrom(new InternetAddress(u.getEmail()));
 			message.setRecipients(Message.RecipientType.TO,
 					InternetAddress.parse(to));
 			message.setSubject(subject);
-			message.setText(text);
+			message.setText(text, "utf-8", "html");
 
 			Transport.send(message);
 

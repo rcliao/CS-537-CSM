@@ -341,7 +341,15 @@
 						},
 						{  },
 						function() {
-
+							Resources.getAnnouncements(
+									{},
+									function(data) {
+										console.log(data);
+										$scope.announcements = data;
+									}, function(err) {
+										console.log(err);
+									}
+								);
 						},
 						function() {
 
@@ -350,13 +358,21 @@
 				};
 
 				$scope.deleteAnnouncement = function(id) {
-					Resources.postAnnouncement(
+					Resources.deleteAnnouncement(
 						{
 							'name': id
 						},
 						{  },
 						function() {
-
+							Resources.getAnnouncements(
+									{},
+									function(data) {
+										console.log(data);
+										$scope.announcements = data;
+									}, function(err) {
+										console.log(err);
+									}
+								);
 						},
 						function() {
 

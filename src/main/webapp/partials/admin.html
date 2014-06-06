@@ -18,4 +18,10 @@
 		<input type="text" ng-model="text">
 	</div>
 	<button class="ui button fluid circular" ng-click="createAnnouncement()">Create New Announcement</button>
+
+	<div class="ui list">
+		<div class="list" ng-repeat="a in announcements">
+			{{a.text}} | <button class="ui button red" ng-click="deleteAnnouncement(a.id)">DELETE</button>
+		</div>
+	</div>
 </div>

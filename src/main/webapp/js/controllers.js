@@ -266,6 +266,17 @@
 							console.log(err);
 						}
 					);
+
+					Resources.getAnnouncements(
+						{},
+						function(data) {
+							console.log(data);
+							$scope.announcements = data;
+						}, function(err) {
+							console.log(err);
+						}
+					);
+
 					// 34.068516, -118.168822
 					$scope.map = {
 						center: {
@@ -327,6 +338,21 @@
 						{
 							'text': $scope.text,
 							'timestamp': Date.now()
+						},
+						{  },
+						function() {
+
+						},
+						function() {
+
+						}
+					)
+				};
+
+				$scope.deleteAnnouncement = function(id) {
+					Resources.postAnnouncement(
+						{
+							'name': id
 						},
 						{  },
 						function() {

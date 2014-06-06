@@ -63,6 +63,10 @@ angular.module('myApp.services', []).
       postAnnouncement: {
         method: 'POST',
         params: { table: 'Announcement', operation: 'new' }
+      },
+      deleteAnnouncement: {
+        method: 'DELETE',
+        params: { table: 'Announcement', operation: 'delete' }
       }
   	});
   })

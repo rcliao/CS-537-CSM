@@ -164,8 +164,8 @@
 				};
 			}
 		])
-		.controller('EmailCtrl', ['$scope', 'Resources',
-			function($scope, Resources) {
+		.controller('EmailCtrl', ['$scope', 'Resources', '$location',
+			function($scope, Resources, $location) {
 				var advancedEditor;
 				$scope.init = function() {
 

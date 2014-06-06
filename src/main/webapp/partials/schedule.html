@@ -1,3 +1,18 @@
 <div ng-init="init()">
-{{events}}
+	<div class="ui list">
+		<div class="list">
+			<div class="item" ng-repeat="e in events">
+				<i class="mail outline icon"></i>
+				<div class="content">
+					<div class="header">Section {{e.classNumber}} | {{e.course.subject}} {{e.course.number}}</div>
+					<div class="description">
+						Unit: {{e.course.units}} Units </br>
+						Room: {{e.room}} </br>
+						Starts at {{e.startDate}} ends at {{e.endDate}}</br>
+						Capacity: {{e.capacity}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

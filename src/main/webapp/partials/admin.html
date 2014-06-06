@@ -1,0 +1,21 @@
+<div class="ui inverted piled segment" ng-init="init()">
+	<h2>Parking Control Panel</h2>
+	<div class="ui list">
+		<div class="list" ng-repeat="spot in parkingLots">
+			Parking Lot {{spot.id}} - {{spot.availableSpots}}
+			<div class="ui huge buttons">
+				<div class="ui red button" ng-click="takeSpot(spot.id)">Take Spot</div>
+				<div class="or"></div>
+				<div class="ui green button" ng-click="freeSpot(spot.id)">Free Spot</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="ui inverted piled segment" ng-init="init()">
+	<h2>Announcement Control Panel</h2>
+	<div class="ui input fluid">
+		<input type="text" ng-model="text">
+	</div>
+	<button class="ui button fluid circular" ng-click="createAnnouncement()">Create New Announcement</button>
+</div>

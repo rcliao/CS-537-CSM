@@ -70,6 +70,15 @@ config(['$routeProvider', function($routeProvider) {
 		'/announcements',
 		{
 			templateUrl: 'partials/announcements.html',
+			controller: 'AnnonCtrl',
+			access: access.student
+		}
+	);
+	$routeProvider.when(
+		'/admin',
+		{
+			templateUrl: 'partials/admin.html',
+			controller: 'AdminCtrl',
 			access: access.student
 		}
 	);

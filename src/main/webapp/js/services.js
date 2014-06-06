@@ -46,6 +46,23 @@ angular.module('myApp.services', []).
       sendEmail: {
         method: 'POST',
         params: { table: 'Email', operation: 'sendEmail' }
+      },
+      takeSpot: {
+        method: 'POST',
+        params: { table: 'ParkingLot', operation: 'decrementAvailableSpots' }
+      },
+      freeSpot: {
+        method: 'POST',
+        params: { table: 'ParkingLot', operation: 'incrementAvailableSpots' }
+      },
+      getAnnouncements: {
+        method: 'GET',
+        params: { table: 'Announcement' },
+        isArray: true
+      },
+      postAnnouncement: {
+        method: 'POST',
+        params: { table: 'Announcement', operation: 'new' }
       }
   	});
   })

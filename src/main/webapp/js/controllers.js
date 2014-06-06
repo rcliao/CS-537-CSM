@@ -253,5 +253,105 @@
 					};
 				};
 			}
+		])
+		.controller('AdminCtrl', ['$scope', 'Resources',
+			function($scope, Resources) {
+				$scope.init = function() {
+					Resources.getParkingLots(
+						{},
+						function(data) {
+							console.log(data);
+							$scope.parkingLots = data;
+						}, function(err) {
+							console.log(err);
+						}
+					);
+					// 34.068516, -118.168822
+					$scope.map = {
+						center: {
+							latitude: 34.068516,
+							longitude: -118.168822
+						},
+						zoom: 16
+					};
+				};
+
+				$scope.freeSpot = function(id) {
+					Resources.freeSpot(
+						{
+							'name': id,
+							'increment': 1
+						},
+						{},
+						function() {
+							Resources.getParkingLots(
+								{},
+								function(data) {
+									console.log(data);
+									$scope.parkingLots = data;
+								}, function(err) {
+									console.log(err);
+								}
+							);
+						},
+						function() {
+
+						});
+				};
+
+				$scope.takeSpot = function(id) {
+					Resources.takeSpot(
+						{
+							'name': id,
+							'increment': 1
+						},
+						{},
+						function() {
+							Resources.getParkingLots(
+								{},
+								function(data) {
+									console.log(data);
+									$scope.parkingLots = data;
+								}, function(err) {
+									console.log(err);
+								}
+							);
+						},
+						function() {
+
+						});
+				};
+
+				$scope.createAnnouncement = function() {
+					Resources.postAnnouncement(
+						{  },
+						{
+							'text': $scope.text,
+							'timestamp': Date.now()
+						},
+						function() {
+
+						},
+						function() {
+
+						}
+					)
+				};
+			}
+		])
+		.controller('AnnounCtrl', ['$scope', 'Resources',
+			function($scope, Resources) {
+				$scope.init = function() {
+					Resources.getAnnouncements(
+						{},
+						function(data) {
+							console.log(data);
+							$scope.announcements = data;
+						}, function(err) {
+							console.log(err);
+						}
+					);
+				};
+			}
 		]);
 }());

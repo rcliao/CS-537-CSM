@@ -1,6 +1,6 @@
 <div class="ui feed segment">
 	<h2 class="ui header">Announcement</h2>
-	<div class="event">
+	<div class="event" ng-repeat="a in announcements">
 		<div class="label">
 			<img src="http://semantic-ui.com/images/demo/avatar.jpg" alt="">
 		</div>
@@ -9,7 +9,7 @@
 				Just a moment ago
 			</div>
 			<div class="summary">
-				CS 537 is canceled
+				{{a.text}}
 			</div>
 		</div>
 	</div>

@@ -9,4 +9,5 @@ DROP TABLE IF EXISTS `csm`.`terms` ;
 DROP TABLE IF EXISTS `csm`.`faculty` ;
 DROP TABLE IF EXISTS `csm`.`department` ;
 DROP TABLE IF EXISTS `csm`.`users` ;
+drop table if exists `csm`.`announcements`;
 

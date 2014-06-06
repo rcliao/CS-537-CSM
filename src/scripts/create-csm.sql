@@ -27,6 +27,16 @@ DROP SCHEMA IF EXISTS `csm` ;
 CREATE SCHEMA IF NOT EXISTS `csm` DEFAULT CHARACTER SET utf8 ;
 
 USE `csm`;
+-- ------------------------------------------------------
+-- Announcements
+-- ------------------------------------------------------
+create table announcements (
+	id int not null auto_increment,
+	`timestamp` timestamp,
+	text varchar(255),
+	primary key(`id`)
+) Engine=InnoDB;
+
 
 -- ------------------------------------------------------
 -- Parking Lot
@@ -260,7 +270,8 @@ CREATE  TABLE IF NOT EXISTS users (
   cin  INT NOT NULL,
   PRIMARY KEY (id) );
 
-
+insert into announcements values
+(null, '2014-06-23 13:10:00', "some test announcement");
 -- -----------------------------------------------------
 -- Insert into parkinglots
 -- -----------------------------------------------------

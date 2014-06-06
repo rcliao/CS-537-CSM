@@ -339,7 +339,7 @@
 				};
 			}
 		])
-		.controller('AnnounCtrl', ['$scope', 'Resources',
+		.controller('AnnonCtrl', ['$scope', 'Resources',
 			function($scope, Resources) {
 				$scope.init = function() {
 					Resources.getAnnouncements(

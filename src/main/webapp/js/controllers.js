@@ -324,11 +324,11 @@
 
 				$scope.createAnnouncement = function() {
 					Resources.postAnnouncement(
-						{  },
 						{
 							'text': $scope.text,
 							'timestamp': Date.now()
 						},
+						{  },
 						function() {
 
 						},

@@ -57,7 +57,7 @@ angular.module('myApp.services', []).
       },
       getAnnouncements: {
         method: 'GET',
-        params: { table: 'Announcement' },
+        params: { table: 'Announcement', operation: 'list' },
         isArray: true
       },
       postAnnouncement: {

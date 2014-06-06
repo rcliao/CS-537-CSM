@@ -202,7 +202,7 @@
 					Resources.sendEmail(
 						{
 							'to': $scope.to,
-							'text': advancedEditor.getText(),
+							'text': advancedEditor.getHTML(),
 							'subject': $scope.subject
 						},
 						{},

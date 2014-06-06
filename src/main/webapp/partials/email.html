@@ -1,5 +1,11 @@
-<input type="text" class="ui input fluid" ng-model="to" placeholder="to">
-<input type="text" class="ui input fluid" ng-model="subject" placeholder="subject">
+<div class="ui left icon input fluid">
+    <input type="text" ng-model="to" placeholder="to">
+    <i class="user icon"></i>
+</div>
+<div class="ui left icon input fluid">
+    <input type="text" ng-model="subject" placeholder="subject">
+    <i class="mail outline icon"></i>
+</div>
 
 <div class="advanced-wrapper" ng-init="init()">
   <div class="toolbar-container"><span class="sc-format-group">
@@ -97,4 +103,4 @@
   <div class="editor-container"></div>
 </div>
 
-<button class="btn btn-block btn-default" ng-click="sendEmail()">Send</button>
+<button class="ui huge fluid circular button" ng-click="sendEmail()">Send</button>

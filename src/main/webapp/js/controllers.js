@@ -207,7 +207,7 @@
 						},
 						{},
 						function() {
-
+							$location.path( "/home" );
 						},
 						function() {
 

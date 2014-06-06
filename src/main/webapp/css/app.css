@@ -149,6 +149,15 @@ a {
 	color: #f3f781;
 }
 
+.advanced-wrapper {
+	width: 100%;
+	margin-left: 0;
+}
+
+.editor-container {
+	height: 300px;
+}
+
 .angular-google-map-container {
 	height: 400px;
 	color: #000;
